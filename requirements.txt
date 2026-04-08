@@ -2,9 +2,3 @@ streamlit
 pandas
 numpy
 plotly
-datetime
-json
-time
-random
-threading
-queue
