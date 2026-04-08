@@ -18,6 +18,36 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
+# Theme-aware logo
+st.markdown("""
+<style>
+    .logo-container {
+        text-align: center;
+        margin-bottom: 1rem;
+    }
+    
+    .logo-light {
+        display: block;
+        margin: 0 auto;
+    }
+    
+    .logo-dark {
+        display: none;
+        margin: 0 auto;
+    }
+    
+    @media (prefers-color-scheme: dark) {
+        .logo-light { display: none; }
+        .logo-dark { display: block; }
+    }
+</style>
+
+<div class="logo-container">
+    <img class="logo-light" src="yantra_logo_light.png" width="250" alt="YANTRA">
+    <img class="logo-dark" src="yantra_logo_dark.png" width="250" alt="YANTRA">
+</div>
+""", unsafe_allow_html=True)
+
 # Session State Init (YOUR EXISTING + NEW ARBITRAGE)
 if 'page' not in st.session_state: 
     st.session_state.page = "Dashboard"
