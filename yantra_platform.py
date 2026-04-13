@@ -1208,7 +1208,7 @@ elif st.session_state.page == "Advanced Orders":
                     st.write(f"**Volume:** {template['volume']}")
                     st.write(f"**Trailing:** {'Yes' if template['trailing_stop'] else 'No'}")
                     
-                                        col_a, col_b = st.columns(2)
+                    col_a, col_b = st.columns(2)
                     
                     with col_a:
                         if st.button("🗑️ Delete", key=f"delete_template_{i}"):
