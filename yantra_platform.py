@@ -3086,7 +3086,7 @@ with footer_col3:
     st.markdown(f"**🌐 Theme:** {st.session_state.theme}")
 
 # Auto-refresh for real-time data
-if st.session_state.auto_refresh and st.session_state.page in ["Dashboard", "Trading Terminal", "Tick Charts", "XAUUSD Arbitrage"]:
+if st.session_state.get('auto_refresh', False) and st.session_state.page in ["Dashboard", "Trading Terminal", "Tick Charts", "XAUUSD Arbitrage"]:
     time.sleep(2)
     st.rerun()
 
