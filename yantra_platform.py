@@ -1912,7 +1912,7 @@ elif st.session_state.page == "Advanced Charts":
     periods = {"1 Day": 24, "1 Week": 168, "1 Month": 720, "3 Months": 2160}
     num_points = periods[chart_period]
     
-    dates = pd.date_range(start=datetime.now() - timedelta(hours=num_points), periods=num_points, freq='H')
+    dates = pd.date_range(start=datetime.now() - timedelta(hours=num_points), periods=num_points, freq='h')
     
     # Generate realistic price data
     base_price = 1.0850 if 'USD' in chart_symbol else 2650.00 if 'XAU' in chart_symbol else 149.50
