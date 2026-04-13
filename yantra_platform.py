@@ -2472,9 +2472,9 @@ elif st.session_state.page == "XAUUSD Arbitrage":
         
         with diff_col2:
             if reverse_diff > st.session_state.get('xauusd_arbitrage', {}).get('settings', {}).get('min_profit_threshold', 0):
-                st.success(f"🟢 Opportunity: ${reverse_diff:.2f}")            else:
-                st.metric("Price Diff B→A", f"${reverse_diff:.2f}")
-        
+                st.success(f"🟢 Opportunity: ${reverse_diff:.2f}")
+            else:
+                st.metric("Price Diff B→A", f"${reverse_diff:.2f}")        
         with diff_col3:
             avg_spread = ((broker_a['ask'] - broker_a['bid']) + (broker_b['ask'] - broker_b['bid'])) / 2
             st.metric("Avg Spread", f"${avg_spread:.2f}")
