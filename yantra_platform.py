@@ -3082,7 +3082,7 @@ with footer_col2:
     st.markdown(f"**⏰ Last Update:** {datetime.now().strftime('%H:%M:%S')}")
 
 with footer_col3:
-    st.markdown(f"**👤 User:** {st.session_state.user_profile['name']}")
+    st.markdown("**👤 User:** Rishi Grasberg")
     st.markdown(f"**🌐 Theme:** {st.session_state.theme}")
 
 # Auto-refresh for real-time data
