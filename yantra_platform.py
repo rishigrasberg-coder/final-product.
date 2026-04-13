@@ -2839,22 +2839,26 @@ elif st.session_state.page == "LP Bridge Manager":
                     st.markdown("#### 💰 Liquidity Info")
                     st.write(f"**Available:** ${lp.get('available_liquidity', 0):,}")
                     st.write(f"**Total:** ${lp.get('total_liquidity', 0):,}")
-                    st.write(f"**Utilization:** {lp.get('utilization', 0):.1f}%")                    st.write(f"**Protocol:** {lp['protocol']}")
-                    st.write(f"**Latency:** {lp['latency']}ms")
-                    st.write(f"**Uptime:** {lp['uptime']}%")
+                    st.write(f"**Utilization:** {lp.get('utilization', 0):.1f}%")
+                    st.write(f"**Protocol:** {lp.get('protocol', 'N/A')}")
+                    st.write(f"**Latency:** {lp.get('latency', 0):.1f}ms")
+                    st.write(f"**Uptime:** {lp.get('uptime', 0):.1f}%")
                     
                     # Connection controls
-                    if lp['status'] == 'Connected':
-                        if st.button(f"🔌 Disconnect", key=f"disconnect_lp_{lp['id']}"):
+                    lp_status = lp.get('status', 'Disconnected')
+                    lp_id = lp.get('id', 'unknown')
+                    lp_name = lp.get('name', 'Unknown')
+                    
+                    if lp_status == 'Connected':
+                        if st.button(f"🔌 Disconnect", key=f"disconnect_lp_{lp_id}"):
                             lp['status'] = 'Disconnected'
-                            st.warning(f"⚠️ {lp['name']} disconnected!")
+                            st.warning(f"⚠️ {lp_name} disconnected!")
                             st.rerun()
                     else:
-                        if st.button(f"🔌 Connect", key=f"connect_lp_{lp['id']}"):
+                        if st.button(f"🔌 Connect", key=f"connect_lp_{lp_id}"):
                             lp['status'] = 'Connected'
-                            st.success(f"✅ {lp['name']} connected!")
-                            st.rerun()
-                
+                            st.success(f"✅ {lp_name} connected!")
+                            st.rerun()                
                 with lp_col2:
                     st.markdown("#### 💰 Liquidity Information")
                     st.write(f"**Available Liquidity:** ${lp['available_liquidity']:,}")
