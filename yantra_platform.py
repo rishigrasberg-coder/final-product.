@@ -2797,19 +2797,21 @@ elif st.session_state.page == "LP Bridge Manager":
             'active_bridges': 5,
             'total_volume': 1250000
         }
-    
-    # LP Bridge status overview
+        # LP Bridge status overview
     col1, col2, col3 = st.columns(3)
     
     with col1:
         connected_lps = len([lp for lp in st.session_state.lp_bridge.get('liquidity_providers', []) if lp.get('status') == 'Connected'])
         total_lps = len(st.session_state.lp_bridge.get('liquidity_providers', []))
-        st.metric("Connected LPs", f"{connected_lps}/{total_lps}")    with col2:
-        total_liquidity = sum([lp['available_liquidity'] for lp in st.session_state.lp_bridge['liquidity_providers']])
+        st.metric("Connected LPs", f"{connected_lps}/{total_lps}")
+    
+    with col2:
+        total_liquidity = sum([lp.get('available_liquidity', 0) for lp in st.session_state.lp_bridge.get('liquidity_providers', [])])
         st.metric("Total Liquidity", f"${total_liquidity:,}")
     
     with col3:
-        avg_latency = np.mean([lp['latency'] for lp in st.session_state.lp_bridge['liquidity_providers'] if lp['status'] == 'Connected'])
+        lps_with_latency = [lp.get('latency', 0) for lp in st.session_state.lp_bridge.get('liquidity_providers', []) if lp.get('status') == 'Connected']
+        avg_latency = np.mean(lps_with_latency) if lps_with_latency else 0
         st.metric("Avg Latency", f"{avg_latency:.1f}ms")
     
     st.markdown("---")
@@ -2819,16 +2821,25 @@ elif st.session_state.page == "LP Bridge Manager":
     with tab1:
         st.markdown("### 🏦 Liquidity Provider Connections")
         
-        for lp in st.session_state.lp_bridge['liquidity_providers']:
-            with st.expander(f"🏦 {lp['name']} - {lp['status']}", expanded=lp['status'] == 'Connected'):
+        for lp in st.session_state.lp_bridge.get('liquidity_providers', []):
+            lp_name = lp.get('name', 'Unknown')
+            lp_status = lp.get('status', 'Unknown')
+            
+            with st.expander(f"🏦 {lp_name} - {lp_status}", expanded=lp_status == 'Connected'):
                 
                 lp_col1, lp_col2 = st.columns(2)
                 
                 with lp_col1:
                     st.markdown("#### 📊 Connection Details")
-                    st.write(f"**Status:** {lp['status']}")
-                    st.write(f"**Type:** {lp['type']}")
-                    st.write(f"**Protocol:** {lp['protocol']}")
+                    st.write(f"**Status:** {lp.get('status', 'N/A')}")
+                    st.write(f"**Type:** {lp.get('type', 'N/A')}")
+                    st.write(f"**Latency:** {lp.get('latency', 0):.1f}ms")
+                
+                with lp_col2:
+                    st.markdown("#### 💰 Liquidity Info")
+                    st.write(f"**Available:** ${lp.get('available_liquidity', 0):,}")
+                    st.write(f"**Total:** ${lp.get('total_liquidity', 0):,}")
+                    st.write(f"**Utilization:** {lp.get('utilization', 0):.1f}%")                    st.write(f"**Protocol:** {lp['protocol']}")
                     st.write(f"**Latency:** {lp['latency']}ms")
                     st.write(f"**Uptime:** {lp['uptime']}%")
                     
