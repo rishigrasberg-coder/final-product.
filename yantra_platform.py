@@ -3065,7 +3065,7 @@ elif st.session_state.page == "LP Bridge Manager":
             }
             
             st.session_state.lp_bridge['settings'] = bridge_settings
-                        st.success("✅ LP Bridge settings saved!")
+            st.success("✅ LP Bridge settings saved!")
 
 # FOOTER AND AUTO-REFRESH
 st.markdown("---")
