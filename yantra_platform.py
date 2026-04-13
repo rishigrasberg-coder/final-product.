@@ -2767,31 +2767,44 @@ elif st.session_state.page == "XAUUSD Arbitrage":
         
         else:
             st.info("No active arbitrage positions")
-        
         # Arbitrage performance summary
         st.markdown("#### 📊 Arbitrage Performance Summary")
         
         perf_col1, perf_col2, perf_col3 = st.columns(3)
         
         with perf_col1:
-            st.metric("Total Arbitrage P&L", f"${st.session_state.xauusd_arbitrage['stats']['total_pnl']:.2f}")
+            total_pnl = st.session_state.xauusd_arbitrage.get('stats', {}).get('total_pnl', 0.0)
+            st.metric("Total Arbitrage P&L", f"${total_pnl:.2f}")
         with perf_col2:
-            st.metric("Success Rate", f"{st.session_state.xauusd_arbitrage['stats']['success_rate']:.1f}%")
+            success_rate = st.session_state.xauusd_arbitrage.get('stats', {}).get('success_rate', 0.0)
+            st.metric("Success Rate", f"{success_rate:.1f}%")
         with perf_col3:
-            st.metric("Avg Profit per Trade", f"${st.session_state.xauusd_arbitrage['stats']['avg_profit']:.2f}")
+            avg_profit = st.session_state.xauusd_arbitrage.get('stats', {}).get('avg_profit', 0.0)
+            st.metric("Avg Profit per Trade", f"${avg_profit:.2f}")
 
 elif st.session_state.page == "LP Bridge Manager":
     st.markdown("# 🌐 LP Bridge Manager")
+    
+    # Initialize LP Bridge session state if it doesn't exist
+    if 'lp_bridge' not in st.session_state:
+        st.session_state.lp_bridge = {
+            'liquidity_providers': [
+                {'name': 'Provider 1', 'status': 'Connected', 'liquidity': 100000},
+                {'name': 'Provider 2', 'status': 'Connected', 'liquidity': 150000},
+                {'name': 'Provider 3', 'status': 'Disconnected', 'liquidity': 0}
+            ],
+            'total_liquidity': 250000,
+            'active_bridges': 5,
+            'total_volume': 1250000
+        }
     
     # LP Bridge status overview
     col1, col2, col3 = st.columns(3)
     
     with col1:
-        connected_lps = len([lp for lp in st.session_state.lp_bridge['liquidity_providers'] if lp['status'] == 'Connected'])
-        total_lps = len(st.session_state.lp_bridge['liquidity_providers'])
-        st.metric("Connected LPs", f"{connected_lps}/{total_lps}")
-    
-    with col2:
+        connected_lps = len([lp for lp in st.session_state.lp_bridge.get('liquidity_providers', []) if lp.get('status') == 'Connected'])
+        total_lps = len(st.session_state.lp_bridge.get('liquidity_providers', []))
+        st.metric("Connected LPs", f"{connected_lps}/{total_lps}")    with col2:
         total_liquidity = sum([lp['available_liquidity'] for lp in st.session_state.lp_bridge['liquidity_providers']])
         st.metric("Total Liquidity", f"${total_liquidity:,}")
     
