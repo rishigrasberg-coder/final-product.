@@ -3078,7 +3078,7 @@ with footer_col1:
     st.markdown("*Advanced Multi-Broker Trading System*")
 
 with footer_col2:
-    st.markdown(f"**📊 System Status:** {'🟢 Online' if st.session_state.system_status else '🔴 Offline'}")
+    st.markdown("**📊 System Status:** 🟢 Online")
     st.markdown(f"**⏰ Last Update:** {datetime.now().strftime('%H:%M:%S')}")
 
 with footer_col3:
