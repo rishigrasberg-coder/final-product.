@@ -1796,7 +1796,7 @@ elif st.session_state.page == "Trading Terminal":
             })
         
         market_df = pd.DataFrame(market_data)
-                st.dataframe(market_df, use_container_width=True, hide_index=True)
+        st.dataframe(market_df, use_container_width=True, hide_index=True)
         
         # Quick trade panel
         st.markdown("### ⚡ Quick Trade")
