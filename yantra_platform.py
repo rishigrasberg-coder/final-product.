@@ -2465,15 +2465,14 @@ elif st.session_state.page == "XAUUSD Arbitrage":
         diff_col1, diff_col2, diff_col3 = st.columns(3)
         
         with diff_col1:
-        if price_diff > st.session_state.get('xauusd_arbitrage', {}).get('settings', {}).get('min_profit_threshold', 0):
+            if price_diff > st.session_state.get('xauusd_arbitrage', {}).get('settings', {}).get('min_profit_threshold', 0):
                 st.success(f"🟢 Opportunity: ${price_diff:.2f}")
             else:
                 st.metric("Price Diff A→B", f"${price_diff:.2f}")
         
         with diff_col2:
-if reverse_diff > st.session_state.get('xauusd_arbitrage', {}).get('settings', {}).get('min_profit_threshold', 0):
-                st.success(f"🟢 Opportunity: ${reverse_diff:.2f}")
-            else:
+            if reverse_diff > st.session_state.get('xauusd_arbitrage', {}).get('settings', {}).get('min_profit_threshold', 0):
+                st.success(f"🟢 Opportunity: ${reverse_diff:.2f}")            else:
                 st.metric("Price Diff B→A", f"${reverse_diff:.2f}")
         
         with diff_col3:
