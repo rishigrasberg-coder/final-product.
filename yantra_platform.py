@@ -1958,8 +1958,8 @@ with save_col2:
         else:
             st.error("Please enter a strategy name")
 
-# This elif needs to match with an if statement at the same level
-elif st.session_state.page == "XAUUSD Arbitrage":
+# This should be an if statement, not elif
+if st.session_state.page == "XAUUSD Arbitrage":
     st.markdown("### 🥇 XAUUSD Arbitrage Engine")
     
     # Arbitrage status header
