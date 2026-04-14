@@ -2463,25 +2463,26 @@ if lp_liquidity:
         
         # System alerts
         st.markdown("#### 🚨 System Alerts")
-        
-        alerts = [
-            {"level": "warning", "message": "High latency detected on LP-3", "time": "2 min ago"},
-            {"level": "info", "message": "LP-1 utilization at 85%", "time": "5 min ago"},
-            {"level": "error", "message": "LP-4 connection timeout", "time": "8 min ago"},
-            {"level": "success", "message": "LP-2 reconnected successfully", "time": "12 min ago"}
-        ]
-        
-        for alert in alerts:
-            if alert['level'] == 'error':
-                st.error(f"🔴 {alert['message']} ({alert['time']})")
-            elif alert['level'] == 'warning':
-                st.warning(f"🟡 {alert['message']} ({alert['time']})")
-            elif alert['level'] == 'success':
-                st.success(f"🟢 {alert['message']} ({alert['time']})")
-            else:
-                st.info(f"🔵 {alert['message']} ({alert['time']})")
 
-elif st.session_state.page == "Risk Management":
+alerts = [
+    {"level": "warning", "message": "High latency detected on LP-3", "time": "2 min ago"},
+    {"level": "info", "message": "LP-1 utilization at 85%", "time": "5 min ago"},
+    {"level": "error", "message": "LP-4 connection timeout", "time": "8 min ago"},
+    {"level": "success", "message": "LP-2 reconnected successfully", "time": "12 min ago"}
+]
+
+for alert in alerts:
+    if alert['level'] == 'error':
+        st.error(f"🔴 {alert['message']} ({alert['time']})")
+    elif alert['level'] == 'warning':
+        st.warning(f"🟡 {alert['message']} ({alert['time']})")
+    elif alert['level'] == 'success':
+        st.success(f"🟢 {alert['message']} ({alert['time']})")
+    else:
+        st.info(f"🔵 {alert['message']} ({alert['time']})")
+
+# Change elif to if since there's no matching if at this level
+if st.session_state.page == "Risk Management":
     st.markdown("### ⚠️ Advanced Risk Management")
     
     # Risk overview dashboard
