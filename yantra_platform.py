@@ -3053,23 +3053,23 @@ elif st.session_state.page == "Settings":
         st.markdown("#### 🎨 Appearance Settings")
         
         # Theme settings
-        theme_col1, theme_col2 = st.columns(2)
-        
-        with theme_col1:
-            new_theme = st.selectbox("Theme", ["Light", "Dark"], 
-                index=0 if st.session_state.theme == "Light" else 1, key="theme_selector")
-            
-            if new_theme != st.session_state.theme:
-                st.session_state.theme = new_theme
-                st.rerun()
-            
-            chart_style = st.selectbox("Chart Style", ["Modern", "Classic", "Minimal"], key="chart_style")
-            color_scheme = st.selectbox("Color Scheme", ["Default", "Blue", "Green", "Purple"], key="color_scheme")
-        
-                with theme_col2:
-            font_size = st.selectbox("Font Size", ["Small", "Medium", "Large"], index=1, key="font_size")
-            layout_density = st.selectbox("Layout Density", ["Compact", "Normal", "Spacious"], index=1, key="layout_density")
-            sidebar_position = st.selectbox("Sidebar Position", ["Left", "Right"], key="sidebar_position")
+theme_col1, theme_col2 = st.columns(2)
+
+with theme_col1:
+    new_theme = st.selectbox("Theme", ["Light", "Dark"], 
+        index=0 if st.session_state.theme == "Light" else 1, key="theme_selector")
+    
+    if new_theme != st.session_state.theme:
+        st.session_state.theme = new_theme
+        st.rerun()
+    
+    chart_style = st.selectbox("Chart Style", ["Modern", "Classic", "Minimal"], key="chart_style")
+    color_scheme = st.selectbox("Color Scheme", ["Default", "Blue", "Green", "Purple"], key="color_scheme")
+
+with theme_col2:
+    font_size = st.selectbox("Font Size", ["Small", "Medium", "Large"], index=1, key="font_size")
+    layout_density = st.selectbox("Layout Density", ["Compact", "Normal", "Spacious"], index=1, key="layout_density")
+    sidebar_position = st.selectbox("Sidebar Position", ["Left", "Right"], key="sidebar_position")
         
         # Dashboard customization
         st.markdown("#### 📊 Dashboard Customization")
