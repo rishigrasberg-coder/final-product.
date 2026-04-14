@@ -3121,6 +3121,7 @@ if st.session_state.get('auto_refresh', False) and st.session_state.page in ["Da
 # Custom CSS for enhanced styling
 # Clean Minimal Professional Styling
 # Clean Minimal Professional Styling - FIXED VERSION
+# BULLETPROOF CSS - VISIBLE NUMBERS GUARANTEED
 st.markdown("""
 <style>
 /* IMPORT CLEAN FONT */
@@ -3128,33 +3129,77 @@ st.markdown("""
 
 /* COMPLETE RESET */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+    margin: 0 !important;
+    padding: 0 !important;
+    box-sizing: border-box !important;
 }
 
 /* BASE APP STYLING */
 .stApp {
-    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
-    color: #1e293b;
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-    font-weight: 400;
+    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%) !important;
+    color: #1e293b !important;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif !important;
 }
 
 /* HIDE STREAMLIT BRANDING */
-#MainMenu { visibility: hidden; }
-footer { visibility: hidden; }
-header { visibility: hidden; }
-.stDeployButton { display: none; }
+#MainMenu { visibility: hidden !important; }
+footer { visibility: hidden !important; }
+header { visibility: hidden !important; }
+.stDeployButton { display: none !important; }
 
-/* SIDEBAR - CLEAN MINIMAL */
+/* FORCE METRIC CARDS TO BE VISIBLE */
+[data-testid="metric-container"] {
+    background: linear-gradient(135deg, #3b82f6, #1d4ed8) !important;
+    border: 2px solid #2563eb !important;
+    border-radius: 16px !important;
+    padding: 2rem !important;
+    box-shadow: 0 8px 25px rgba(59, 130, 246, 0.3) !important;
+    margin: 1rem 0 !important;
+}
+
+/* FORCE METRIC VALUES TO BE WHITE AND VISIBLE */
+[data-testid="metric-container"] [data-testid="metric-value"] {
+    color: #ffffff !important;
+    font-size: 3rem !important;
+    font-weight: 900 !important;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3) !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    line-height: 1 !important;
+    display: block !important;
+    visibility: visible !important;
+}
+
+/* FORCE METRIC LABELS TO BE WHITE */
+[data-testid="metric-container"] [data-testid="metric-label"] {
+    color: rgba(255,255,255,0.95) !important;
+    font-size: 1rem !important;
+    font-weight: 600 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.1em !important;
+    margin-top: 0.5rem !important;
+    display: block !important;
+    visibility: visible !important;
+}
+
+/* FORCE METRIC DELTA TO BE WHITE */
+[data-testid="metric-container"] [data-testid="metric-delta"] {
+    color: #ffffff !important;
+    background: rgba(255,255,255,0.2) !important;
+    padding: 0.5rem 1rem !important;
+    border-radius: 25px !important;
+    font-weight: 700 !important;
+    margin-top: 1rem !important;
+    display: inline-block !important;
+    visibility: visible !important;
+}
+
+/* SIDEBAR STYLING */
 .css-1d391kg {
     background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%) !important;
     border-right: 1px solid #e2e8f0 !important;
-    box-shadow: 2px 0 10px rgba(0,0,0,0.05) !important;
 }
 
-/* SIDEBAR BUTTONS - CLEAN STYLE */
 .css-1d391kg .stButton > button {
     background: #ffffff !important;
     color: #475569 !important;
@@ -3163,11 +3208,8 @@ header { visibility: hidden; }
     padding: 0.75rem 1rem !important;
     margin: 0.25rem 0 !important;
     font-weight: 500 !important;
-    font-size: 0.875rem !important;
     transition: all 0.2s ease !important;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.05) !important;
     width: 100% !important;
-    text-align: left !important;
 }
 
 .css-1d391kg .stButton > button:hover {
@@ -3175,56 +3217,6 @@ header { visibility: hidden; }
     color: white !important;
     border-color: #3b82f6 !important;
     transform: translateY(-1px) !important;
-    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.2) !important;
-}
-
-/* MAIN CONTENT AREA */
-.main .block-container {
-    padding: 2rem 3rem !important;
-    max-width: 1400px !important;
-}
-
-/* FIXED METRIC CARDS - VISIBLE NUMBERS */
-[data-testid="metric-container"] {
-    background: linear-gradient(135deg, #3b82f6, #1d4ed8) !important;
-    border: 1px solid #2563eb !important;
-    border-radius: 16px !important;
-    padding: 2rem !important;
-    box-shadow: 0 4px 20px rgba(59, 130, 246, 0.2) !important;
-    transition: all 0.3s ease !important;
-    text-align: center !important;
-}
-
-[data-testid="metric-container"]:hover {
-    transform: translateY(-4px) !important;
-    box-shadow: 0 8px 30px rgba(59, 130, 246, 0.3) !important;
-    border-color: #1d4ed8 !important;
-}
-
-[data-testid="metric-container"] [data-testid="metric-value"] {
-    font-size: 2.5rem !important;
-    font-weight: 700 !important;
-    color: #ffffff !important;
-    margin-bottom: 0.5rem !important;
-    text-shadow: 0 1px 2px rgba(0,0,0,0.1) !important;
-}
-
-[data-testid="metric-container"] [data-testid="metric-label"] {
-    font-size: 0.875rem !important;
-    color: rgba(255,255,255,0.9) !important;
-    font-weight: 500 !important;
-    text-transform: uppercase !important;
-    letter-spacing: 0.05em !important;
-}
-
-[data-testid="metric-container"] [data-testid="metric-delta"] {
-    font-size: 0.75rem !important;
-    background: rgba(255,255,255,0.2) !important;
-    color: #ffffff !important;
-    padding: 0.25rem 0.75rem !important;
-    border-radius: 20px !important;
-    margin-top: 0.75rem !important;
-    font-weight: 600 !important;
 }
 
 /* COLUMN FIXES */
@@ -3236,36 +3228,28 @@ header { visibility: hidden; }
     padding: 0 !important;
 }
 
-/* CLEAN CARDS */
+/* FORCE CARDS TO BE WHITE */
 .stExpander {
     background: #ffffff !important;
     border: 1px solid #e2e8f0 !important;
     border-radius: 16px !important;
     box-shadow: 0 4px 20px rgba(0,0,0,0.08) !important;
     margin-bottom: 1.5rem !important;
-    overflow: hidden !important;
-}
-
-.stExpander:hover {
-    border-color: #3b82f6 !important;
-    box-shadow: 0 8px 30px rgba(0,0,0,0.12) !important;
 }
 
 .streamlit-expanderHeader {
     background: #f8fafc !important;
-    border-bottom: 1px solid #e2e8f0 !important;
-    padding: 1.25rem 1.5rem !important;
     color: #1e293b !important;
     font-weight: 600 !important;
-    font-size: 1rem !important;
+    padding: 1.25rem 1.5rem !important;
 }
 
 .streamlit-expanderContent {
-    padding: 1.5rem !important;
     background: #ffffff !important;
+    padding: 1.5rem !important;
 }
 
-/* CLEAN BUTTONS */
+/* FORCE BUTTONS TO BE BLUE */
 .stButton > button {
     background: #3b82f6 !important;
     color: white !important;
@@ -3273,59 +3257,43 @@ header { visibility: hidden; }
     border-radius: 12px !important;
     padding: 0.75rem 1.5rem !important;
     font-weight: 600 !important;
-    font-size: 0.875rem !important;
     transition: all 0.2s ease !important;
-    box-shadow: 0 2px 8px rgba(59, 130, 246, 0.2) !important;
     width: 100% !important;
 }
 
 .stButton > button:hover {
     background: #2563eb !important;
     transform: translateY(-1px) !important;
-    box-shadow: 0 4px 16px rgba(59, 130, 246, 0.3) !important;
 }
 
-/* SUCCESS BUTTONS */
-.stButton > button[kind="primary"] {
-    background: #10b981 !important;
-    box-shadow: 0 2px 8px rgba(16, 185, 129, 0.2) !important;
+/* FORCE CHARTS TO BE WHITE */
+.plotly-graph-div {
+    background: #ffffff !important;
+    border: 1px solid #e2e8f0 !important;
+    border-radius: 16px !important;
+    padding: 1rem !important;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08) !important;
 }
 
-.stButton > button[kind="primary"]:hover {
-    background: #059669 !important;
-    box-shadow: 0 4px 16px rgba(16, 185, 129, 0.3) !important;
-}
-
-/* CLEAN TABLES */
+/* FORCE TABLES TO BE WHITE */
 .dataframe {
     background: #ffffff !important;
     border: 1px solid #e2e8f0 !important;
     border-radius: 16px !important;
     overflow: hidden !important;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.08) !important;
 }
 
 .dataframe th {
     background: #f8fafc !important;
     color: #374151 !important;
     font-weight: 600 !important;
-    padding: 1rem 1.5rem !important;
-    border-bottom: 1px solid #e2e8f0 !important;
-    font-size: 0.875rem !important;
-    text-transform: uppercase !important;
-    letter-spacing: 0.05em !important;
+    padding: 1rem !important;
 }
 
 .dataframe td {
-    padding: 1rem 1.5rem !important;
-    border-bottom: 1px solid #f1f5f9 !important;
-    color: #374151 !important;
     background: #ffffff !important;
-    font-size: 0.875rem !important;
-}
-
-.dataframe tr:hover td {
-    background: #f8fafc !important;
+    color: #374151 !important;
+    padding: 1rem !important;
 }
 
 /* FORM INPUTS */
@@ -3336,129 +3304,45 @@ header { visibility: hidden; }
     border: 1px solid #d1d5db !important;
     border-radius: 12px !important;
     color: #374151 !important;
-    padding: 0.75rem 1rem !important;
-    font-size: 0.875rem !important;
-    transition: all 0.2s ease !important;
+    padding: 0.75rem !important;
 }
 
-.stTextInput > div > div > input:focus,
-.stSelectbox > div > div > select:focus,
-.stNumberInput > div > div > input:focus {
-    border-color: #3b82f6 !important;
-    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1) !important;
-    outline: none !important;
-}
-
-/* SELECTBOX STYLING */
-.stSelectbox > div > div {
-    background: #ffffff !important;
-    border: 1px solid #d1d5db !important;
-    border-radius: 12px !important;
-}
-
-/* TABS - CLEAN STYLE */
+/* TABS */
 .stTabs [data-baseweb="tab-list"] {
-    gap: 0.5rem !important;
     background: #f8fafc !important;
     padding: 0.5rem !important;
     border-radius: 16px !important;
-    margin-bottom: 2rem !important;
     border: 1px solid #e2e8f0 !important;
 }
 
 .stTabs [data-baseweb="tab"] {
-    background: transparent !important;
-    border-radius: 12px !important;
     color: #64748b !important;
     padding: 0.75rem 1.5rem !important;
-    font-weight: 500 !important;
-    border: none !important;
-    transition: all 0.2s ease !important;
-}
-
-.stTabs [data-baseweb="tab"]:hover {
-    background: #e2e8f0 !important;
-    color: #374151 !important;
+    border-radius: 12px !important;
 }
 
 .stTabs [aria-selected="true"] {
     background: #3b82f6 !important;
     color: white !important;
-    box-shadow: 0 2px 8px rgba(59, 130, 246, 0.2) !important;
-}
-
-/* CHARTS - LIGHT BACKGROUND */
-.plotly-graph-div {
-    background: #ffffff !important;
-    border: 1px solid #e2e8f0 !important;
-    border-radius: 16px !important;
-    padding: 1rem !important;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.08) !important;
-}
-
-/* ALERTS */
-.stAlert {
-    border-radius: 12px !important;
-    border: none !important;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.08) !important;
-}
-
-.stAlert[data-baseweb="notification"] {
-    background: #10b981 !important;
-    color: white !important;
-}
-
-.stAlert[data-baseweb="notification"][kind="info"] {
-    background: #3b82f6 !important;
-}
-
-.stAlert[data-baseweb="notification"][kind="warning"] {
-    background: #f59e0b !important;
-}
-
-.stAlert[data-baseweb="notification"][kind="error"] {
-    background: #ef4444 !important;
 }
 
 /* HEADERS */
 .stMarkdown h1 {
     color: #1e293b !important;
     font-weight: 700 !important;
-    font-size: 2.5rem !important;
     margin-bottom: 2rem !important;
 }
 
 .stMarkdown h2 {
     color: #374151 !important;
     font-weight: 600 !important;
-    font-size: 1.875rem !important;
     margin-bottom: 1.5rem !important;
 }
 
 .stMarkdown h3 {
     color: #475569 !important;
     font-weight: 600 !important;
-    font-size: 1.25rem !important;
     margin-bottom: 1rem !important;
-}
-
-/* RESPONSIVE DESIGN */
-@media (max-width: 768px) {
-    .main .block-container {
-        padding: 1rem !important;
-    }
-    
-    .stColumns {
-        gap: 1rem !important;
-    }
-    
-    [data-testid="metric-container"] {
-        padding: 1.5rem !important;
-    }
-    
-    [data-testid="metric-container"] [data-testid="metric-value"] {
-        font-size: 2rem !important;
-    }
 }
 
 /* SCROLLBAR */
@@ -3473,20 +3357,6 @@ header { visibility: hidden; }
 ::-webkit-scrollbar-thumb {
     background: #cbd5e1;
     border-radius: 4px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-    background: #94a3b8;
-}
-
-/* ANIMATIONS */
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-.fade-in {
-    animation: fadeIn 0.6s ease-out;
 }
 </style>
 """, unsafe_allow_html=True)
