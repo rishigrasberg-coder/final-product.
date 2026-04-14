@@ -1,8 +1,3 @@
-**🚀 COMPLETE REBUILD - YANTRA TRADING PLATFORM V2.0**
-
-Here's your **COMPLETELY REBUILT** trading platform with **ZERO EMPTY SPACE** and **PROFESSIONAL LAYOUT**:
-
-```python
 import streamlit as st
 import pandas as pd
 import numpy as np
@@ -14,7 +9,7 @@ import time
 import random
 import json
 
-# ===== PAGE CONFIG =====
+# ====
 st.set_page_config(
     page_title="Yantra Trading Platform",
     page_icon="🚀",
@@ -22,7 +17,7 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# ===== SESSION STATE INITIALIZATION =====
+# ====
 def init_session_state():
     """Initialize only essential session state data"""
     if 'page' not in st.session_state:
@@ -51,7 +46,7 @@ def init_session_state():
 
 init_session_state()
 
-# ===== COMPACT SIDEBAR =====
+# ====
 with st.sidebar:
     st.markdown("# 🚀 YANTRA")
     
@@ -83,7 +78,7 @@ with st.sidebar:
         status_icon = "🟢" if data['status'] == 'Connected' else "🔴"
         st.markdown(f"{status_icon} {name[:8]} • {data['positions']} pos")
 
-# ===== MAIN CONTENT AREA =====
+# ====
 if st.session_state.page == "Dashboard":
     # Header Row - Compact
     col1, col2, col3, col4 = st.columns(4)
@@ -592,6 +587,8 @@ elif st.session_state.page == "LP Bridge":
         st.metric("Connected LPs", f"{connected}/{len(lps)}")
     
     with col2:
+        total_liquidity = sum([lp['liquidity'] for lp in lps])
+        st.metric("Total Liquidity", f"${total_
                 total_liquidity = sum([lp['liquidity'] for lp in lps])
         st.metric("Total Liquidity", f"${total_liquidity:,}")
     
@@ -665,7 +662,7 @@ elif st.session_state.page == "Settings":
         if st.button("🔄 Reset Settings", key="reset_settings", use_container_width=True):
             st.warning("⚠️ Settings reset to default!")
 
-# ===== FOOTER =====
+# ====
 st.markdown("---")
 
 footer_col1, footer_col2, footer_col3 = st.columns(3)
