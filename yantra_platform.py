@@ -616,49 +616,51 @@ if st.session_state.page == "Dashboard":
             </div>
             """, unsafe_allow_html=True)
         
-        # Open positions summary
-        st.markdown("### 💼 Open Positions")
+        # Open positions
+        st.markdown("### 📊 Open Positions")
         
         if st.session_state.portfolio['positions']:
-            for pos in st.session_state.portfolio['positions'][-5:]:  # Show last 5 positions
+            for pos in st.session_state.portfolio['positions']:
                 pnl_color = "#10B981" if pos['pnl'] > 0 else "#EF4444"
-                duration = datetime.now() - pos['open_time']
-                duration_str = str(duration).split('.')[0]  # Remove microseconds
                 
                 st.markdown(f"""
-                <div style="background: white; padding: 0.75rem; margin: 0.5rem 0; border-radius: 8px; border-left: 4px solid {pnl_color}; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
-                    <strong>{pos['symbol']} {pos['type']}</strong><br>
-                    Volume: {pos['volume']}<br>
-                    Entry: {pos['entry_price']:.4f}<br>
-                    Current: {pos['current_price']:.4f}<br>
-                    P&L: <span style="color: {pnl_color}; font-weight: bold;">${pos['pnl']:+.2f}</span><br>
-                    <small>Duration: {duration_str}</small><br>
-                    <small>Broker: {pos['broker']}</small>
+                <div style="background: rgba(255,255,255,0.05); border-left: 4px solid {pnl_color}; padding: 1rem; margin: 0.5rem 0; border-radius: 8px; border: 1px solid #333;">
+                    <h4 style="color: #FFFFFF; margin: 0 0 0.5rem 0;">{pos['symbol']} - {pos['type']}</h4>
+                    <p style="color: #CCCCCC; margin: 0.25rem 0;">Volume: <span style="color: #FFFFFF;">{pos['volume']}</span></p>
+                    <p style="color: #CCCCCC; margin: 0.25rem 0;">Entry: <span style="color: #FFFFFF;">{pos['entry_price']}</span></p>
+                    <p style="color: #CCCCCC; margin: 0.25rem 0;">Current: <span style="color: #FFFFFF;">{pos['current_price']}</span></p>
+                    <p style="color: {pnl_color}; margin: 0.25rem 0; font-weight: bold;">P&L: ${pos['pnl']:+.2f}</p>
                 </div>
                 """, unsafe_allow_html=True)
         else:
-            st.info("No open positions")
-        
-                # Pending orders
+            st.markdown("""
+            <div style="background: rgba(255,255,255,0.05); padding: 1rem; margin: 0.5rem 0; border-radius: 8px; border: 1px solid #333; text-align: center;">
+                <p style="color: #CCCCCC; margin: 0;">No open positions</p>
+            </div>
+            """, unsafe_allow_html=True)
+            
+        # Pending orders
         st.markdown("### 📋 Pending Orders")
         
-        if st.session_state.portfolio['pending_orders']:
-            for order in st.session_state.portfolio['pending_orders']:
-                order_color = "#3B82F6" if 'BUY' in order['type'] else "#F59E0B"
+        if st.session_state.pending_orders:
+            for order in st.session_state.pending_orders:
+                order_color = "#3B82F6"  # Blue for pending
                 
                 st.markdown(f"""
-                <div style="background: white; padding: 0.75rem; margin: 0.5rem 0; border-radius: 8px; border-left: 4px solid {order_color}; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
-                    <strong>{order['symbol']} {order['type']}</strong><br>
-                    Volume: {order['volume']}<br>
-                    Price: {order['price']:.4f}<br>
-                    SL: {order.get('sl', 'None')}<br>
-                    TP: {order.get('tp', 'None')}<br>
-                    <small>Broker: {order['broker']}</small>
+                <div style="background: rgba(255,255,255,0.05); border-left: 4px solid {order_color}; padding: 1rem; margin: 0.5rem 0; border-radius: 8px; border: 1px solid #333;">
+                    <h4 style="color: #FFFFFF; margin: 0 0 0.5rem 0;">{order['symbol']} - {order['type']}</h4>
+                    <p style="color: #CCCCCC; margin: 0.25rem 0;">Volume: <span style="color: #FFFFFF;">{order['volume']}</span></p>
+                    <p style="color: #CCCCCC; margin: 0.25rem 0;">Price: <span style="color: #FFFFFF;">{order['price']}</span></p>
+                    <p style="color: {order_color}; margin: 0.25rem 0; font-weight: bold;">Status: {order['status']}</p>
                 </div>
                 """, unsafe_allow_html=True)
         else:
-            st.info("No pending orders")
-        
+            st.markdown("""
+            <div style="background: rgba(255,255,255,0.05); padding: 1rem; margin: 0.5rem 0; border-radius: 8px; border: 1px solid #333; text-align: center;">
+                <p style="color: #CCCCCC; margin: 0;">No pending orders</p>
+            </div>
+            """, unsafe_allow_html=True)
+            
         # Recent activity feed
         st.markdown("### 📈 Recent Activity")
         
