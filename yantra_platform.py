@@ -3134,153 +3134,243 @@ if st.session_state.get('auto_refresh', False) and st.session_state.page in ["Da
 # BULLETPROOF PROFESSIONAL CSS - FINAL VERSION
 # SIMPLE WORKING CSS - NO CONFLICTS
 # SIMPLE WORKING CSS - NO CONFLICTS
+# TARGETED CSS - FIXES SPACING FOR ALL PAGES
 st.markdown("""
 <style>
 /* IMPORT FONT */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
-... SIMPLE CSS CODE ...
+
+/* HIDE STREAMLIT STUFF */
+#MainMenu {visibility: hidden;}
+footer {visibility: hidden;}
+header {visibility: hidden;}
+
+/* GLOBAL APP SETTINGS */
+.stApp {
+    background: #f8f9fa !important;
+    font-family: 'Inter', sans-serif !important;
+}
+
+/* MAIN CONTENT - COMPACT FOR ALL PAGES */
+.main .block-container {
+    padding: 1rem 2rem !important;
+    max-width: 1200px !important;
+    margin: 0 auto !important;
+}
+
+/* SIDEBAR - PROPER SPACING */
+section[data-testid="stSidebar"] {
+    background: #1a1a1a !important;
+    padding: 1rem !important;
+}
+
+section[data-testid="stSidebar"] .stMarkdown {
+    color: white !important;
+    margin-bottom: 0.5rem !important;
+}
+
+section[data-testid="stSidebar"] .stButton {
+    margin-bottom: 0.25rem !important;
+}
+
+section[data-testid="stSidebar"] .stButton > button {
+    background: transparent !important;
+    color: white !important;
+    border: 1px solid #333 !important;
+    border-radius: 8px !important;
+    width: 100% !important;
+    padding: 0.5rem 1rem !important;
+    margin: 0 !important;
+    font-size: 0.9rem !important;
+}
+
+section[data-testid="stSidebar"] .stButton > button:hover {
+    background: #333 !important;
+    color: white !important;
+}
+
+/* COLUMNS - PROPER SPACING FOR ALL PAGES */
+.stColumns {
+    gap: 1rem !important;
+    margin-bottom: 1rem !important;
+}
+
+.stColumn {
+    padding: 0 !important;
+}
+
+/* METRIC CARDS - COMPACT */
+[data-testid="metric-container"] {
+    background: white !important;
+    border: 1px solid #ddd !important;
+    border-radius: 12px !important;
+    padding: 1rem !important;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1) !important;
+    margin: 0.5rem 0 !important;
+}
+
+[data-testid="metric-container"] [data-testid="metric-value"] {
+    color: #000 !important;
+    font-size: 2rem !important;
+    font-weight: 700 !important;
+    margin: 0 !important;
+}
+
+[data-testid="metric-container"] [data-testid="metric-label"] {
+    color: #666 !important;
+    font-size: 0.8rem !important;
+    font-weight: 500 !important;
+    margin: 0 !important;
+}
+
+[data-testid="metric-container"] [data-testid="metric-delta"] {
+    color: #666 !important;
+    background: #f0f0f0 !important;
+    padding: 2px 6px !important;
+    border-radius: 8px !important;
+    font-size: 0.7rem !important;
+    margin: 0 !important;
+}
+
+/* CHARTS - COMPACT */
+.plotly-graph-div {
+    background: white !important;
+    border: 1px solid #ddd !important;
+    border-radius: 12px !important;
+    padding: 0.5rem !important;
+    margin: 0.5rem 0 !important;
+}
+
+/* BUTTONS - COMPACT */
+.stButton > button {
+    background: #1a1a1a !important;
+    color: white !important;
+    border: none !important;
+    border-radius: 8px !important;
+    padding: 0.5rem 1rem !important;
+    font-weight: 500 !important;
+    font-size: 0.9rem !important;
+    margin: 0.25rem 0 !important;
+}
+
+.stButton > button:hover {
+    background: #333 !important;
+}
+
+/* CARDS/EXPANDERS - COMPACT */
+.stExpander {
+    background: white !important;
+    border: 1px solid #ddd !important;
+    border-radius: 12px !important;
+    margin-bottom: 0.5rem !important;
+}
+
+.streamlit-expanderHeader {
+    background: #f8f9fa !important;
+    color: #000 !important;
+    font-weight: 600 !important;
+    padding: 0.75rem 1rem !important;
+}
+
+.streamlit-expanderContent {
+    background: white !important;
+    padding: 1rem !important;
+}
+
+/* TABLES - COMPACT */
+.dataframe {
+    background: white !important;
+    border: 1px solid #ddd !important;
+    border-radius: 8px !important;
+    margin: 0.5rem 0 !important;
+}
+
+.dataframe th {
+    background: #f8f9fa !important;
+    color: #000 !important;
+    font-weight: 600 !important;
+    padding: 0.5rem !important;
+    font-size: 0.8rem !important;
+}
+
+.dataframe td {
+    background: white !important;
+    color: #000 !important;
+    padding: 0.5rem !important;
+    font-size: 0.8rem !important;
+}
+
+/* TEXT - COMPACT HEADERS */
+.stMarkdown h1 {
+    color: #000 !important;
+    font-size: 2rem !important;
+    margin: 0.5rem 0 !important;
+}
+
+.stMarkdown h2 {
+    color: #000 !important;
+    font-size: 1.5rem !important;
+    margin: 0.5rem 0 !important;
+}
+
+.stMarkdown h3 {
+    color: #000 !important;
+    font-size: 1.2rem !important;
+    margin: 0.5rem 0 !important;
+}
+
+.stMarkdown p {
+    color: #333 !important;
+    margin: 0.25rem 0 !important;
+}
+
+/* REMOVE EXCESSIVE SPACING */
+.element-container {
+    margin-bottom: 0.5rem !important;
+}
+
+/* COMPACT DIVIDERS */
+hr {
+    margin: 1rem 0 !important;
+}
+
+/* FORM INPUTS - COMPACT */
+.stTextInput, .stSelectbox, .stNumberInput {
+    margin-bottom: 0.5rem !important;
+}
+
+.stTextInput > div > div > input,
+.stSelectbox > div > div > select,
+.stNumberInput > div > div > input {
+    background: white !important;
+    border: 1px solid #ddd !important;
+    border-radius: 8px !important;
+    color: #000 !important;
+    padding: 0.5rem !important;
+    font-size: 0.9rem !important;
+}
+
+/* TABS - COMPACT */
+.stTabs [data-baseweb="tab-list"] {
+    background: white !important;
+    border: 1px solid #ddd !important;
+    border-radius: 8px !important;
+    margin-bottom: 1rem !important;
+    padding: 0.25rem !important;
+}
+
+.stTabs [data-baseweb="tab"] {
+    color: #666 !important;
+    padding: 0.5rem 1rem !important;
+    border-radius: 6px !important;
+    font-size: 0.9rem !important;
+}
+
+.stTabs [aria-selected="true"] {
+    background: #1a1a1a !important;
+    color: white !important;
+}
 </style>
 """, unsafe_allow_html=True)
-# JavaScript for enhanced interactivity
-st.markdown("""
-<script>
-// Auto-refresh functionality
-function autoRefresh() {
-    if (window.location.search.includes('auto_refresh=true')) {
-        setTimeout(() => {
-            window.location.reload();
-        }, 5000);
-    }
-}
-
-// Notification system
-function showNotification(message, type = 'info') {
-    const notification = document.createElement('div');
-    notification.className = `notification notification-${type}`;
-    notification.textContent = message;
-    
-    document.body.appendChild(notification);
-    
-    setTimeout(() => {
-        notification.remove();
-    }, 5000);
-}
-
-// Keyboard shortcuts
-document.addEventListener('keydown', function(e) {
-    // Ctrl+R for refresh
-    if (e.ctrlKey && e.key === 'r') {
-        e.preventDefault();
-        window.location.reload();
-    }
-    
-    // Ctrl+D for dashboard
-    if (e.ctrlKey && e.key === 'd') {
-        e.preventDefault();
-        // Navigate to dashboard
-    }
-    
-    // Ctrl+T for trading terminal
-    if (e.ctrlKey && e.key === 't') {
-        e.preventDefault();
-        // Navigate to trading terminal
-    }
-});
-
-// Initialize on page load
-document.addEventListener('DOMContentLoaded', function() {
-    autoRefresh();
-    
-    // Add fade-in animation to main content
-    const mainContent = document.querySelector('.main');
-    if (mainContent) {
-        mainContent.classList.add('fade-in');
-    }
-    
-    // Add hover effects to cards
-    const cards = document.querySelectorAll('.metric-card, .broker-card, .copy-trader-card');
-    cards.forEach(card => {
-        card.classList.add('hover-card');
-    });
-});
-
-// Real-time clock
-function updateClock() {
-    const now = new Date();
-    const timeString = now.toLocaleTimeString();
-    const clockElements = document.querySelectorAll('.live-clock');
-    clockElements.forEach(element => {
-        element.textContent = timeString;
-    });
-}
-
-setInterval(updateClock, 1000);
-
-// Connection status monitor
-function checkConnectionStatus() {
-    // Simulate connection check
-    const isOnline = navigator.onLine;
-    const statusElements = document.querySelectorAll('.connection-status');
-    
-    statusElements.forEach(element => {
-        if (isOnline) {
-            element.textContent = '🟢 Online';
-            element.className = 'connection-status status-online';
-        } else {
-            element.textContent = '🔴 Offline';
-            element.className = 'connection-status status-offline';
-        }
-    });
-}
-
-setInterval(checkConnectionStatus, 5000);
-
-// Price update animations
-function animatePriceChange(element, newValue, oldValue) {
-    if (newValue > oldValue) {
-        element.classList.add('price-up');
-        setTimeout(() => element.classList.remove('price-up'), 1000);
-    } else if (newValue < oldValue) {
-        element.classList.add('price-down');
-        setTimeout(() => element.classList.remove('price-down'), 1000);
-    }
-}
-
-// Chart resize handler
-window.addEventListener('resize', function() {
-    // Trigger Plotly chart resize
-    const charts = document.querySelectorAll('.plotly-graph-div');
-    charts.forEach(chart => {
-        if (window.Plotly) {
-            window.Plotly.Plots.resize(chart);
-        }
-    });
-});
-
-// Performance monitoring
-function monitorPerformance() {
-    const perfData = performance.getEntriesByType('navigation')[0];
-    if (perfData) {
-        console.log('Page Load Time:', perfData.loadEventEnd - perfData.loadEventStart, 'ms');
-    }
-}
-
-window.addEventListener('load', monitorPerformance);
-
-// Error handling
-window.addEventListener('error', function(e) {
-    console.error('JavaScript Error:', e.error);
-    showNotification('An error occurred. Please refresh the page.', 'error');
-});
-
-// Service worker registration for offline support
-if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('/sw.js')
-        .then(registration => console.log('SW registered'))
-        .catch(error => console.log('SW registration failed'));
-}
-</script>
-""", unsafe_allow_html=True)
-
 # End of application
 print("✅ Yantra Trading Platform loaded successfully!")
