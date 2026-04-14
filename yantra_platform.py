@@ -1821,27 +1821,36 @@ for template in templates:
     if st.session_state.backtesting['results']:
         st.markdown("### 📊 Backtest Results")
         
-        # Get latest results
-        latest_result = st.session_state.backtesting['results'][-1]
+        # Get latest results - with error handling
+        try:
+            latest_result = st.session_state.backtesting['results'][-1]
+        except (IndexError, KeyError):
+            st.error("No backtest results available")
+            latest_result = None
         
-        # Results overview
-        result_col1, result_col2, result_col3, result_col4, result_col5 = st.columns(5)
-        
-        with result_col1:
-            st.metric("Total Return", f"{latest_result['total_return']:+.2f}%")
-        
-        with result_col2:
-            st.metric("Win Rate", f"{latest_result['win_rate']:.1f}%")
-        
-        with result_col3:
-            st.metric("Total Trades", latest_result['num_trades'])
-        
-        with result_col4:
-            st.metric("Profit Factor", f"{latest_result['profit_factor']:.2f}")
-        
-        with result_col5:
-            st.metric("Sharpe Ratio", f"{latest_result['sharpe_ratio']:.2f}")
-        
+        if latest_result:
+            # Results overview - with safe access
+            result_col1, result_col2, result_col3, result_col4, result_col5 = st.columns(5)
+            
+            with result_col1:
+                total_return = latest_result.get('total_return', 0.0)
+                st.metric("Total Return", f"{total_return:+.2f}%")
+            
+            with result_col2:
+                win_rate = latest_result.get('win_rate', 0.0)
+                st.metric("Win Rate", f"{win_rate:.1f}%")
+            
+            with result_col3:
+                num_trades = latest_result.get('num_trades', 0)
+                st.metric("Total Trades", num_trades)
+            
+            with result_col4:
+                profit_factor = latest_result.get('profit_factor', 0.0)
+                st.metric("Profit Factor", f"{profit_factor:.2f}")
+            
+            with result_col5:
+                sharpe_ratio = latest_result.get('sharpe_ratio', 0.0)
+                st.metric("Sharpe Ratio", f"{sharpe_ratio:.2f}")        
         # Detailed results
         detail_col1, detail_col2 = st.columns(2)
         
@@ -1934,30 +1943,36 @@ for template in templates:
         st.plotly_chart(fig, use_container_width=True)
         
         # Save strategy option
-save_col1, save_col2 = st.columns(2)
-
-with save_col1:
-    strategy_name = st.text_input("Strategy Name", f"{latest_result['strategy']} {latest_result['symbol']}", key="save_strategy_name")
-
-with save_col2:
-    if st.button("💾 Save Strategy", key="save_strategy", use_container_width=True):
-        if strategy_name:
-            saved_strategy = {
-                'name': strategy_name,
-                'symbol': latest_result['symbol'],
-                'timeframe': latest_result['timeframe'],
-                'strategy': latest_result['strategy'],
-                'parameters': {},  # Would store actual parameters
-                'total_return': latest_result['total_return'],
-                'win_rate': latest_result['win_rate'],
-                'max_drawdown': latest_result['max_drawdown'],
-                'sharpe_ratio': latest_result['sharpe_ratio']
-            }
-            st.session_state.backtesting['saved_strategies'].append(saved_strategy)
-            st.success(f"✅ Strategy '{strategy_name}' saved!")
-        else:
-            st.error("Please enter a strategy name")
-
+        save_col1, save_col2 = st.columns(2)
+        
+        with save_col1:
+            # Fix: Check if latest_result exists and has required keys
+            if latest_result and 'strategy' in latest_result and 'symbol' in latest_result:
+                default_name = f"{latest_result['strategy']} {latest_result['symbol']}"
+            else:
+                default_name = "My Strategy"
+            
+            strategy_name = st.text_input("Strategy Name", default_name, key="save_strategy_name")
+        
+        with save_col2:
+            if st.button("💾 Save Strategy", key="save_strategy", use_container_width=True):
+                if strategy_name:
+                    # Fix: Safely access dictionary values with defaults
+                    saved_strategy = {
+                        'name': strategy_name,
+                        'symbol': latest_result.get('symbol', 'UNKNOWN'),
+                        'timeframe': latest_result.get('timeframe', '1H'),
+                        'strategy': latest_result.get('strategy', 'Custom'),
+                        'parameters': {},  # Would store actual parameters
+                        'total_return': latest_result.get('total_return', 0.0),
+                        'win_rate': latest_result.get('win_rate', 0.0),
+                        'max_drawdown': latest_result.get('max_drawdown', 0.0),
+                        'sharpe_ratio': latest_result.get('sharpe_ratio', 0.0)
+                    }
+                    st.session_state.backtesting['saved_strategies'].append(saved_strategy)
+                    st.success(f"✅ Strategy '{strategy_name}' saved!")
+                else:
+                    st.error("Please enter a strategy name")
 # This should be an if statement, not elif
 if st.session_state.page == "XAUUSD Arbitrage":
     st.markdown("### 🥇 XAUUSD Arbitrage Engine")
