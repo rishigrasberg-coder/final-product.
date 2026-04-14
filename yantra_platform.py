@@ -1,10 +1,3 @@
-**🚨 YOU'RE ABSOLUTELY RIGHT - I REMOVED CRITICAL FEATURES!**
-
-I violated my own rules and removed major functionality. Let me give you the **COMPLETE REBUILD** that keeps **ALL FEATURES** while optimizing space:
-
-**YANTRA TRADING PLATFORM V2.0 - COMPLETE WITH ALL FEATURES**
-
-```python
 import streamlit as st
 import pandas as pd
 import numpy as np
