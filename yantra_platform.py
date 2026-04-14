@@ -574,18 +574,45 @@ if st.session_state.page == "Dashboard":
         # Broker status detailed
         st.markdown("### 🔗 Broker Connections")
         
-        for broker_name, broker_data in st.session_state.brokers.items():
-            status_color = "#10B981" if broker_data['status'] == 'Connected' else "#EF4444"
-            
-            st.markdown(f"""
-            <div style="background: white; border-left: 4px solid {status_color}; padding: 0.75rem; margin: 0.5rem 0; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
-                <strong>{broker_name}</strong><br>
-                <span style="color: {status_color};">● {broker_data['status']}</span><br>
-                <small>Server: {broker_data.get('server', 'N/A')}</small><br>
-                Balance: ${broker_data['balance']:,}<br>
-                Equity: ${broker_data.get('equity', broker_data['balance']):,}<br>
-                Positions: {broker_data['positions']}<br>
-                Ping: {broker_data.get('ping', 0)}ms
+                # Create broker cards with proper dark theme styling
+        broker_col1, broker_col2, broker_col3 = st.columns(3)
+        
+        with broker_col1:
+            st.markdown("""
+            <div style="background: rgba(255,255,255,0.05); border-left: 4px solid #10B981; padding: 1rem; margin: 0.5rem 0; border-radius: 8px; border: 1px solid #333;">
+                <h4 style="color: #FFFFFF; margin: 0 0 0.5rem 0;">🟢 Divit Capital</h4>
+                <p style="color: #10B981; margin: 0.25rem 0;">● Connected</p>
+                <p style="color: #CCCCCC; margin: 0.25rem 0; font-size: 0.9rem;">Server: Live-01</p>
+                <p style="color: #FFFFFF; margin: 0.25rem 0;">Balance: $50,000</p>
+                <p style="color: #FFFFFF; margin: 0.25rem 0;">Equity: $52,150</p>
+                <p style="color: #FFFFFF; margin: 0.25rem 0;">Positions: 3</p>
+                <p style="color: #FFFFFF; margin: 0.25rem 0;">Ping: 12ms</p>
+            </div>
+            """, unsafe_allow_html=True)
+        
+        with broker_col2:
+            st.markdown("""
+            <div style="background: rgba(255,255,255,0.05); border-left: 4px solid #10B981; padding: 1rem; margin: 0.5rem 0; border-radius: 8px; border: 1px solid #333;">
+                <h4 style="color: #FFFFFF; margin: 0 0 0.5rem 0;">🟢 Kama Capital</h4>
+                <p style="color: #10B981; margin: 0.25rem 0;">● Connected</p>
+                <p style="color: #CCCCCC; margin: 0.25rem 0; font-size: 0.9rem;">Server: Demo-02</p>
+                <p style="color: #FFFFFF; margin: 0.25rem 0;">Balance: $10,000</p>
+                <p style="color: #FFFFFF; margin: 0.25rem 0;">Equity: $10,850</p>
+                <p style="color: #FFFFFF; margin: 0.25rem 0;">Positions: 1</p>
+                <p style="color: #FFFFFF; margin: 0.25rem 0;">Ping: 8ms</p>
+            </div>
+            """, unsafe_allow_html=True)
+        
+        with broker_col3:
+            st.markdown("""
+            <div style="background: rgba(255,255,255,0.05); border-left: 4px solid #10B981; padding: 1rem; margin: 0.5rem 0; border-radius: 8px; border: 1px solid #333;">
+                <h4 style="color: #FFFFFF; margin: 0 0 0.5rem 0;">🟢 LP Bridge</h4>
+                <p style="color: #10B981; margin: 0.25rem 0;">● Connected</p>
+                <p style="color: #CCCCCC; margin: 0.25rem 0; font-size: 0.9rem;">Server: Bridge-01</p>
+                <p style="color: #FFFFFF; margin: 0.25rem 0;">Balance: $100,000</p>
+                <p style="color: #FFFFFF; margin: 0.25rem 0;">Equity: $102,500</p>
+                <p style="color: #FFFFFF; margin: 0.25rem 0;">Positions: 5</p>
+                <p style="color: #FFFFFF; margin: 0.25rem 0;">Ping: 15ms</p>
             </div>
             """, unsafe_allow_html=True)
         
