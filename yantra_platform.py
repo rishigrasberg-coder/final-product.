@@ -1812,10 +1812,10 @@ templates = [
     "MACD Signal",
     "Support/Resistance"
 ]
-        
-        for template in templates:
-            if st.button(f"📋 {template}", key=f"template_{template}", use_container_width=True):
-                st.info(f"Loading {template} template...")
+
+for template in templates:
+    if st.button(f"📋 {template}", key=f"template_{template}", use_container_width=True):
+        st.info(f"Loading {template} template...")
     
     # Backtest results display
     if st.session_state.backtesting['results']:
