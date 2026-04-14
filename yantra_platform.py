@@ -3091,218 +3091,218 @@ with settings_tab2:
     st.markdown("#### 🔔 Notification Settings")
         
         # Notification preferences
-        notif_col1, notif_col2 = st.columns(2)
-        
-        with notif_col1:
-            st.markdown("**Trade Notifications**")
-            notify_trade_open = st.checkbox("Trade Opened", True, key="notify_trade_open")
-            notify_trade_close = st.checkbox("Trade Closed", True, key="notify_trade_close")
-            notify_sl_hit = st.checkbox("Stop Loss Hit", True, key="notify_sl")
-            notify_tp_hit = st.checkbox("Take Profit Hit", True, key="notify_tp")
-            
-            st.markdown("**Market Notifications**")
-            notify_price_alerts = st.checkbox("Price Alerts", True, key="notify_price_alerts")
-            notify_news = st.checkbox("Economic News", False, key="notify_news")
-            notify_volatility = st.checkbox("High Volatility", True, key="notify_volatility")
-        
-        with notif_col2:
-            st.markdown("**System Notifications**")
-            notify_connection = st.checkbox("Connection Status", True, key="notify_connection")
-            notify_margin = st.checkbox("Margin Calls", True, key="notify_margin")
-            notify_updates = st.checkbox("Platform Updates", True, key="notify_updates")
-            
-            st.markdown("**Delivery Methods**")
-            email_notifications = st.checkbox("Email", True, key="email_notif")
-            push_notifications = st.checkbox("Push Notifications", True, key="push_notif")
-            sms_notifications = st.checkbox("SMS (Premium)", False, key="sms_notif")
-            
-            # Email settings
-            if email_notifications:
-                notification_email = st.text_input("Notification Email", "rishibrillant@gmail.com", key="notif_email")
-        
-        # Notification schedule
-        st.markdown("#### ⏰ Notification Schedule")
-        
-        schedule_col1, schedule_col2 = st.columns(2)
-        
-        with schedule_col1:
-            quiet_hours = st.checkbox("Enable Quiet Hours", False, key="quiet_hours")
-            if quiet_hours:
-                quiet_start = st.time_input("Quiet Start", datetime.strptime("22:00", "%H:%M").time(), key="quiet_start")
-                quiet_end = st.time_input("Quiet End", datetime.strptime("08:00", "%H:%M").time(), key="quiet_end")
-        
-        with schedule_col2:
-            weekend_notifications = st.checkbox("Weekend Notifications", False, key="weekend_notif")
-            max_notifications_hour = st.number_input("Max Notifications/Hour", 1, 100, 10, key="max_notif_hour")
+notif_col1, notif_col2 = st.columns(2)
+
+with notif_col1:
+    st.markdown("**Trade Notifications**")
+    notify_trade_open = st.checkbox("Trade Opened", True, key="notify_trade_open")
+    notify_trade_close = st.checkbox("Trade Closed", True, key="notify_trade_close")
+    notify_sl_hit = st.checkbox("Stop Loss Hit", True, key="notify_sl")
+    notify_tp_hit = st.checkbox("Take Profit Hit", True, key="notify_tp")
     
-    with settings_tab3:
-        st.markdown("#### 🔐 Security Settings")
-        
-        # Account security
-        security_col1, security_col2 = st.columns(2)
-        
-        with security_col1:
-            st.markdown("**Account Security**")
-            
-            two_factor_auth = st.checkbox("Two-Factor Authentication", True, key="2fa")
-            if two_factor_auth:
-                st.success("✅ 2FA is enabled")
-                if st.button("🔄 Reset 2FA", key="reset_2fa"):
-                    st.info("2FA reset instructions sent to your email")
-            
-            session_timeout = st.selectbox("Session Timeout", ["15 minutes", "30 minutes", "1 hour", "4 hours", "Never"], index=2, key="session_timeout")
-            
-            login_notifications = st.checkbox("Login Notifications", True, key="login_notif")
-            
-            # Password change
-            st.markdown("**Change Password**")
-            current_password = st.text_input("Current Password", type="password", key="current_pass")
-            new_password = st.text_input("New Password", type="password", key="new_pass")
-            confirm_password = st.text_input("Confirm Password", type="password", key="confirm_pass")
-            
-            if st.button("🔒 Change Password", key="change_password"):
-                if new_password == confirm_password and len(new_password) >= 8:
-                    st.success("✅ Password changed successfully!")
-                else:
-                    st.error("❌ Passwords don't match or too short")
-        
-        with security_col2:
-            st.markdown("**Trading Security**")
-            
-            require_password_trades = st.checkbox("Require Password for Large Trades", False, key="password_trades")
-            if require_password_trades:
-                large_trade_threshold = st.number_input("Large Trade Threshold ($)", 1000, 100000, 10000, key="large_trade_threshold")
-            
-            ip_whitelist = st.checkbox("IP Address Whitelist", False, key="ip_whitelist")
-            if ip_whitelist:
-                allowed_ips = st.text_area("Allowed IP Addresses (one per line)", "192.168.1.100\n203.0.113.1", key="allowed_ips")
-            
-            api_access = st.checkbox("API Access Enabled", True, key="api_access")
-            if api_access:
-                if st.button("🔑 Generate New API Key", key="new_api_key"):
-                    new_key = "YT_" + "".join(random.choices("ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789", k=32))
-                    st.code(new_key)
-                    st.warning("⚠️ Save this key securely - it won't be shown again!")
-            
-            # Active sessions
-            st.markdown("**Active Sessions**")
-            sessions = [
-                {"Device": "Windows PC", "Location": "Mumbai, India", "Last Active": "Now", "IP": "203.0.113.1"},
-                {"Device": "iPhone", "Location": "Mumbai, India", "Last Active": "2 hours ago", "IP": "203.0.113.2"}
-            ]
-            
-            for i, session in enumerate(sessions):
-                with st.container():
-                    sess_col1, sess_col2 = st.columns([3, 1])
-                    with sess_col1:
-                        st.markdown(f"**{session['Device']}** - {session['Location']}")
-                        st.markdown(f"<small>Last active: {session['Last Active']} | IP: {session['IP']}</small>", unsafe_allow_html=True)
-                    with sess_col2:
-                        if session['Last Active'] != "Now":
-                            if st.button("🚫 Revoke", key=f"revoke_session_{i}"):
-                                st.success("Session revoked!")
+    st.markdown("**Market Notifications**")
+    notify_price_alerts = st.checkbox("Price Alerts", True, key="notify_price_alerts")
+    notify_news = st.checkbox("Economic News", False, key="notify_news")
+    notify_volatility = st.checkbox("High Volatility", True, key="notify_volatility")
+
+with notif_col2:
+    st.markdown("**System Notifications**")
+    notify_connection = st.checkbox("Connection Status", True, key="notify_connection")
+    notify_margin = st.checkbox("Margin Calls", True, key="notify_margin")
+    notify_updates = st.checkbox("Platform Updates", True, key="notify_updates")
     
-    with settings_tab4:
-        st.markdown("#### 🔧 Advanced Settings")
-        
-        # Trading settings
-        advanced_col1, advanced_col2 = st.columns(2)
-        
-        with advanced_col1:
-            st.markdown("**Trading Configuration**")
-            
-            default_lot_size = st.number_input("Default Lot Size", 0.01, 10.0, 0.1, 0.01, key="default_lot")
-            slippage_tolerance = st.number_input("Slippage Tolerance (pips)", 0.1, 10.0, 2.0, 0.1, key="slippage_tolerance")
-            execution_mode = st.selectbox("Execution Mode", ["Market", "Instant", "Request"], key="execution_mode")
-            
-            auto_sl_tp = st.checkbox("Auto Set SL/TP", True, key="auto_sl_tp")
-            if auto_sl_tp:
-                default_sl = st.number_input("Default SL (pips)", 5, 500, 50, key="default_sl")
-                default_tp = st.number_input("Default TP (pips)", 5, 500, 100, key="default_tp")
-            
-            one_click_trading = st.checkbox("One-Click Trading", False, key="one_click")
-            if one_click_trading:
-                st.warning("⚠️ One-click trading bypasses confirmation dialogs")
-        
-        with advanced_col2:
-            st.markdown("**Data & Performance**")
-            
-            data_compression = st.checkbox("Enable Data Compression", True, key="data_compression")
-            cache_size = st.selectbox("Cache Size", ["Small (100MB)", "Medium (500MB)", "Large (1GB)"], index=1, key="cache_size")
-            
-            max_chart_bars = st.number_input("Max Chart Bars", 1000, 100000, 10000, key="max_chart_bars")
-            tick_data_retention = st.selectbox("Tick Data Retention", ["1 Day", "1 Week", "1 Month"], index=1, key="tick_retention")
-            
-            hardware_acceleration = st.checkbox("Hardware Acceleration", True, key="hardware_accel")
-            multi_threading = st.checkbox("Multi-Threading", True, key="multi_threading")
-            
-            # Debug settings
-            st.markdown("**Debug & Logging**")
-            debug_mode = st.checkbox("Debug Mode", False, key="debug_mode")
-            log_level = st.selectbox("Log Level", ["Error", "Warning", "Info", "Debug"], index=2, key="log_level")
-            
-            if st.button("📋 Export Logs", key="export_logs"):
-                st.info("Logs exported to Downloads folder")
-            
-            if st.button("🧹 Clear Cache", key="clear_cache"):
-                st.success("✅ Cache cleared successfully!")
-        
-        # Backup and restore
-        st.markdown("#### 💾 Backup & Restore")
-        
-        backup_col1, backup_col2 = st.columns(2)
-        
-        with backup_col1:
-            st.markdown("**Backup Settings**")
-            
-            auto_backup = st.checkbox("Auto Backup", True, key="auto_backup")
-            if auto_backup:
-                backup_frequency = st.selectbox("Backup Frequency", ["Daily", "Weekly", "Monthly"], key="backup_frequency")
-                backup_location = st.selectbox("Backup Location", ["Local", "Cloud", "Both"], index=2, key="backup_location")
-            
-            if st.button("💾 Create Backup Now", key="create_backup"):
-                with st.spinner("Creating backup..."):
-                    time.sleep(2)
-                st.success("✅ Backup created successfully!")
-        
-        with backup_col2:
-            st.markdown("**Restore Settings**")
-            
-            st.file_uploader("Upload Backup File", type=['bak', 'zip'], key="restore_file")
-            
-            if st.button("🔄 Restore from Backup", key="restore_backup"):
-                st.warning("⚠️ This will overwrite current settings. Continue?")
-                if st.button("✅ Confirm Restore", key="confirm_restore"):
-                    st.success("✅ Settings restored successfully!")
-        
-        # Reset options
-        st.markdown("#### 🔄 Reset Options")
-        
-        reset_col1, reset_col2, reset_col3 = st.columns(3)
-        
-        with reset_col1:
-            if st.button("🔄 Reset UI Settings", key="reset_ui"):
-                st.info("UI settings reset to default")
-        
-        with reset_col2:
-            if st.button("🔄 Reset Trading Settings", key="reset_trading"):
-                st.info("Trading settings reset to default")
-        
-        with reset_col3:
-            if st.button("🔄 Factory Reset", key="factory_reset"):
-                st.error("⚠️ This will reset ALL settings!")
+    st.markdown("**Delivery Methods**")
+    email_notifications = st.checkbox("Email", True, key="email_notif")
+    push_notifications = st.checkbox("Push Notifications", True, key="push_notif")
+    sms_notifications = st.checkbox("SMS (Premium)", False, key="sms_notif")
     
-    # Save all settings
-    st.markdown("---")
-    save_col1, save_col2 = st.columns(2)
+    # Email settings
+    if email_notifications:
+        notification_email = st.text_input("Notification Email", "rishibrillant@gmail.com", key="notif_email")
+
+# Notification schedule
+st.markdown("#### ⏰ Notification Schedule")
+
+schedule_col1, schedule_col2 = st.columns(2)
+
+with schedule_col1:
+    quiet_hours = st.checkbox("Enable Quiet Hours", False, key="quiet_hours")
+    if quiet_hours:
+        quiet_start = st.time_input("Quiet Start", datetime.strptime("22:00", "%H:%M").time(), key="quiet_start")
+        quiet_end = st.time_input("Quiet End", datetime.strptime("08:00", "%H:%M").time(), key="quiet_end")
+
+with schedule_col2:
+    weekend_notifications = st.checkbox("Weekend Notifications", False, key="weekend_notif")
+    max_notifications_hour = st.number_input("Max Notifications/Hour", 1, 100, 10, key="max_notif_hour")
+
+with settings_tab3:
+    st.markdown("#### 🔐 Security Settings")
     
-    with save_col1:
-        if st.button("💾 Save All Settings", key="save_all_settings", use_container_width=True):
-            st.success("✅ All settings saved successfully!")
+    # Account security
+    security_col1, security_col2 = st.columns(2)
     
-    with save_col2:
-        if st.button("🔄 Reset to Defaults", key="reset_all_settings", use_container_width=True):
-            st.warning("⚠️ All settings reset to default values!")
+    with security_col1:
+        st.markdown("**Account Security**")
+        
+        two_factor_auth = st.checkbox("Two-Factor Authentication", True, key="2fa")
+        if two_factor_auth:
+            st.success("✅ 2FA is enabled")
+            if st.button("🔄 Reset 2FA", key="reset_2fa"):
+                st.info("2FA reset instructions sent to your email")
+        
+        session_timeout = st.selectbox("Session Timeout", ["15 minutes", "30 minutes", "1 hour", "4 hours", "Never"], index=2, key="session_timeout")
+        
+        login_notifications = st.checkbox("Login Notifications", True, key="login_notif")
+        
+        # Password change
+        st.markdown("**Change Password**")
+        current_password = st.text_input("Current Password", type="password", key="current_pass")
+        new_password = st.text_input("New Password", type="password", key="new_pass")
+        confirm_password = st.text_input("Confirm Password", type="password", key="confirm_pass")
+        
+        if st.button("🔒 Change Password", key="change_password"):
+            if new_password == confirm_password and len(new_password) >= 8:
+                st.success("✅ Password changed successfully!")
+            else:
+                st.error("❌ Passwords don't match or too short")
+    
+    with security_col2:
+        st.markdown("**Trading Security**")
+        
+        require_password_trades = st.checkbox("Require Password for Large Trades", False, key="password_trades")
+        if require_password_trades:
+            large_trade_threshold = st.number_input("Large Trade Threshold ($)", 1000, 100000, 10000, key="large_trade_threshold")
+        
+        ip_whitelist = st.checkbox("IP Address Whitelist", False, key="ip_whitelist")
+        if ip_whitelist:
+            allowed_ips = st.text_area("Allowed IP Addresses (one per line)", "192.168.1.100\n203.0.113.1", key="allowed_ips")
+        
+        api_access = st.checkbox("API Access Enabled", True, key="api_access")
+        if api_access:
+            if st.button("🔑 Generate New API Key", key="new_api_key"):
+                new_key = "YT_" + "".join(random.choices("ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789", k=32))
+                st.code(new_key)
+                st.warning("⚠️ Save this key securely - it won't be shown again!")
+        
+        # Active sessions
+        st.markdown("**Active Sessions**")
+        sessions = [
+            {"Device": "Windows PC", "Location": "Mumbai, India", "Last Active": "Now", "IP": "203.0.113.1"},
+            {"Device": "iPhone", "Location": "Mumbai, India", "Last Active": "2 hours ago", "IP": "203.0.113.2"}
+        ]
+        
+        for i, session in enumerate(sessions):
+            with st.container():
+                sess_col1, sess_col2 = st.columns([3, 1])
+                with sess_col1:
+                    st.markdown(f"**{session['Device']}** - {session['Location']}")
+                    st.markdown(f"<small>Last active: {session['Last Active']} | IP: {session['IP']}</small>", unsafe_allow_html=True)
+                with sess_col2:
+                    if session['Last Active'] != "Now":
+                        if st.button("🚫 Revoke", key=f"revoke_session_{i}"):
+                            st.success("Session revoked!")
+
+with settings_tab4:
+    st.markdown("#### 🔧 Advanced Settings")
+    
+    # Trading settings
+    advanced_col1, advanced_col2 = st.columns(2)
+    
+    with advanced_col1:
+        st.markdown("**Trading Configuration**")
+        
+        default_lot_size = st.number_input("Default Lot Size", 0.01, 10.0, 0.1, 0.01, key="default_lot")
+        slippage_tolerance = st.number_input("Slippage Tolerance (pips)", 0.1, 10.0, 2.0, 0.1, key="slippage_tolerance")
+        execution_mode = st.selectbox("Execution Mode", ["Market", "Instant", "Request"], key="execution_mode")
+        
+        auto_sl_tp = st.checkbox("Auto Set SL/TP", True, key="auto_sl_tp")
+        if auto_sl_tp:
+            default_sl = st.number_input("Default SL (pips)", 5, 500, 50, key="default_sl")
+            default_tp = st.number_input("Default TP (pips)", 5, 500, 100, key="default_tp")
+        
+        one_click_trading = st.checkbox("One-Click Trading", False, key="one_click")
+        if one_click_trading:
+            st.warning("⚠️ One-click trading bypasses confirmation dialogs")
+    
+    with advanced_col2:
+        st.markdown("**Data & Performance**")
+        
+        data_compression = st.checkbox("Enable Data Compression", True, key="data_compression")
+        cache_size = st.selectbox("Cache Size", ["Small (100MB)", "Medium (500MB)", "Large (1GB)"], index=1, key="cache_size")
+        
+        max_chart_bars = st.number_input("Max Chart Bars", 1000, 100000, 10000, key="max_chart_bars")
+        tick_data_retention = st.selectbox("Tick Data Retention", ["1 Day", "1 Week", "1 Month"], index=1, key="tick_retention")
+        
+        hardware_acceleration = st.checkbox("Hardware Acceleration", True, key="hardware_accel")
+        multi_threading = st.checkbox("Multi-Threading", True, key="multi_threading")
+        
+        # Debug settings
+        st.markdown("**Debug & Logging**")
+        debug_mode = st.checkbox("Debug Mode", False, key="debug_mode")
+        log_level = st.selectbox("Log Level", ["Error", "Warning", "Info", "Debug"], index=2, key="log_level")
+        
+        if st.button("📋 Export Logs", key="export_logs"):
+            st.info("Logs exported to Downloads folder")
+        
+        if st.button("🧹 Clear Cache", key="clear_cache"):
+            st.success("✅ Cache cleared successfully!")
+    
+    # Backup and restore
+    st.markdown("#### 💾 Backup & Restore")
+    
+    backup_col1, backup_col2 = st.columns(2)
+    
+    with backup_col1:
+        st.markdown("**Backup Settings**")
+        
+        auto_backup = st.checkbox("Auto Backup", True, key="auto_backup")
+        if auto_backup:
+            backup_frequency = st.selectbox("Backup Frequency", ["Daily", "Weekly", "Monthly"], key="backup_frequency")
+            backup_location = st.selectbox("Backup Location", ["Local", "Cloud", "Both"], index=2, key="backup_location")
+        
+        if st.button("💾 Create Backup Now", key="create_backup"):
+            with st.spinner("Creating backup..."):
+                time.sleep(2)
+            st.success("✅ Backup created successfully!")
+    
+    with backup_col2:
+        st.markdown("**Restore Settings**")
+        
+        st.file_uploader("Upload Backup File", type=['bak', 'zip'], key="restore_file")
+        
+        if st.button("🔄 Restore from Backup", key="restore_backup"):
+            st.warning("⚠️ This will overwrite current settings. Continue?")
+            if st.button("✅ Confirm Restore", key="confirm_restore"):
+                st.success("✅ Settings restored successfully!")
+    
+    # Reset options
+    st.markdown("#### 🔄 Reset Options")
+    
+    reset_col1, reset_col2, reset_col3 = st.columns(3)
+    
+    with reset_col1:
+        if st.button("🔄 Reset UI Settings", key="reset_ui"):
+            st.info("UI settings reset to default")
+    
+    with reset_col2:
+        if st.button("🔄 Reset Trading Settings", key="reset_trading"):
+            st.info("Trading settings reset to default")
+    
+    with reset_col3:
+        if st.button("🔄 Factory Reset", key="factory_reset"):
+            st.error("⚠️ This will reset ALL settings!")
+
+# Save all settings
+st.markdown("---")
+save_col1, save_col2 = st.columns(2)
+
+with save_col1:
+    if st.button("💾 Save All Settings", key="save_all_settings", use_container_width=True):
+        st.success("✅ All settings saved successfully!")
+
+with save_col2:
+    if st.button("🔄 Reset to Defaults", key="reset_all_settings", use_container_width=True):
+        st.warning("⚠️ All settings reset to default values!")
 
 # Footer
 st.markdown("---")
