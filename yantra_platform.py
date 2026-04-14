@@ -450,53 +450,45 @@ if st.session_state.page == "Dashboard":
     # Main dashboard content
     col1, col2 = st.columns([2, 1])
     
-    with col1:
-        # Market overview with real-time data
+    with col1:        # Market Overview
         st.markdown("### 📊 Market Overview")
         
-        # Generate market data for major pairs
-        market_data = []
-        for symbol in st.session_state.mt5_symbols[:8]:  # Top 8 symbols
-            if 'USD' in symbol:
-                base_price = random.uniform(0.8, 1.5) if symbol != 'USDJPY' else random.uniform(140, 155)
-            elif 'XAU' in symbol:
-                base_price = random.uniform(2600, 2700)
-            else:
-                base_price = random.uniform(0.6, 2.0)
+        # Create candlestick chart
+        symbols = ['EURUSD', 'GBPUSD', 'USDJPY', 'AUDUSD', 'USDCAD', 'NZDUSD', 'USDCHF', 'EURGBP']
+        
+        # Generate realistic OHLC data
+        ohlc_data = []
+        for symbol in symbols:
+            open_price = random.uniform(1.0, 2.0)
+            close_price = open_price + random.uniform(-0.02, 0.02)
+            high_price = max(open_price, close_price) + random.uniform(0, 0.01)
+            low_price = min(open_price, close_price) - random.uniform(0, 0.01)
             
-            change = random.uniform(-1.5, 2.0)
-            volume = random.randint(1000, 10000)
-            
-            market_data.append({
+            ohlc_data.append({
                 'Symbol': symbol,
-                'Price': base_price,
-                'Change': change,
-                'Volume': volume
+                'Open': open_price,
+                'High': high_price,
+                'Low': low_price,
+                'Close': close_price,
+                'Change': ((close_price - open_price) / open_price) * 100
             })
         
-        # Create market overview chart
-        df_market = pd.DataFrame(market_data)
-        
-        fig = go.Figure()
-        
-        # Color bars based on positive/negative change
-        colors = ['#10B981' if change > 0 else '#EF4444' for change in df_market['Change']]
-        
-        fig.add_trace(go.Bar(
-            x=df_market['Symbol'],
-            y=df_market['Change'],
-            marker_color=colors,
-            text=[f"{change:+.2f}%" for change in df_market['Change']],
-            textposition='outside',
-            name='Daily Change %'
-        ))
+        # Create candlestick chart
+        fig = go.Figure(data=[go.Candlestick(
+            x=symbols,
+            open=[d['Open'] for d in ohlc_data],
+            high=[d['High'] for d in ohlc_data],
+            low=[d['Low'] for d in ohlc_data],
+            close=[d['Close'] for d in ohlc_data],
+            name='Price'
+        )])
         
         fig.update_layout(
-            title="Daily Price Changes - Major Pairs",
-            xaxis_title="Symbol",
-            yaxis_title="Change %",
+            title="24H Price Action - Major Pairs",
+            yaxis_title="Price",
             template='plotly_dark' if st.session_state.theme == "Dark" else 'plotly_white',
-            height=350,
+            height=400,
+            xaxis_rangeslider_visible=False,
             margin=dict(l=20, r=20, t=40, b=20)
         )
         
