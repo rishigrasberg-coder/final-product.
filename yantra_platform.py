@@ -1940,24 +1940,25 @@ for template in templates:
             strategy_name = st.text_input("Strategy Name", f"{latest_result['strategy']} {latest_result['symbol']}", key="save_strategy_name")
         
         with save_col2:
-            if st.button("💾 Save Strategy", key="save_strategy", use_container_width=True):
-                if strategy_name:
-                    saved_strategy = {
-                        'name': strategy_name,
-                        'symbol': latest_result['symbol'],
-                        'timeframe': latest_result['timeframe'],
-                        'strategy': latest_result['strategy'],
-                        'parameters': {},  # Would store actual parameters
-                        'total_return': latest_result['total_return'],
-                        'win_rate': latest_result['win_rate'],
-                        'max_drawdown': latest_result['max_drawdown'],
-                        'sharpe_ratio': latest_result['sharpe_ratio']
-                    }
-                    st.session_state.backtesting['saved_strategies'].append(saved_strategy)
-                    st.success(f"✅ Strategy '{strategy_name}' saved!")
-                else:
-                    st.error("Please enter a strategy name")
+    if st.button("💾 Save Strategy", key="save_strategy", use_container_width=True):
+        if strategy_name:
+            saved_strategy = {
+                'name': strategy_name,
+                'symbol': latest_result['symbol'],
+                'timeframe': latest_result['timeframe'],
+                'strategy': latest_result['strategy'],
+                'parameters': {},  # Would store actual parameters
+                'total_return': latest_result['total_return'],
+                'win_rate': latest_result['win_rate'],
+                'max_drawdown': latest_result['max_drawdown'],
+                'sharpe_ratio': latest_result['sharpe_ratio']
+            }
+            st.session_state.backtesting['saved_strategies'].append(saved_strategy)
+            st.success(f"✅ Strategy '{strategy_name}' saved!")
+        else:
+            st.error("Please enter a strategy name")
 
+# This elif needs to match with an if statement at the same level
 elif st.session_state.page == "XAUUSD Arbitrage":
     st.markdown("### 🥇 XAUUSD Arbitrage Engine")
     
