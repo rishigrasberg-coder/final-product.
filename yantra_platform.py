@@ -1934,12 +1934,12 @@ for template in templates:
         st.plotly_chart(fig, use_container_width=True)
         
         # Save strategy option
-        save_col1, save_col2 = st.columns(2)
-        
-        with save_col1:
-            strategy_name = st.text_input("Strategy Name", f"{latest_result['strategy']} {latest_result['symbol']}", key="save_strategy_name")
-        
-        with save_col2:
+save_col1, save_col2 = st.columns(2)
+
+with save_col1:
+    strategy_name = st.text_input("Strategy Name", f"{latest_result['strategy']} {latest_result['symbol']}", key="save_strategy_name")
+
+with save_col2:
     if st.button("💾 Save Strategy", key="save_strategy", use_container_width=True):
         if strategy_name:
             saved_strategy = {
