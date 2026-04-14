@@ -623,8 +623,8 @@ if st.session_state.page == "Dashboard":
         # Pending orders
         st.markdown("### 📋 Pending Orders")
         
-        if st.session_state.pending_orders:
-            for order in st.session_state.pending_orders:
+        if st.session_state.portfolio.get('pending_orders', []):
+            for order in st.session_state.portfolio.get('pending_orders', []):
                 order_color = "#3B82F6"  # Blue for pending
                 
                 st.markdown(f"""
