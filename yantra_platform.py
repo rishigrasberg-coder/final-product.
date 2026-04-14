@@ -563,31 +563,7 @@ footer {visibility: hidden;}
 st.markdown(theme_css, unsafe_allow_html=True)
 
 # ENHANCED SIDEBAR WITH ALL NEW FEATURES
-# Clean Professional Header
-st.markdown("""
-<div style="
-    background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
-    padding: 2rem;
-    border-radius: 20px;
-    margin-bottom: 2rem;
-    text-align: center;
-    box-shadow: 0 8px 30px rgba(59, 130, 246, 0.2);
-">
-    <h1 style="
-        color: white;
-        font-size: 2.5rem;
-        font-weight: 700;
-        margin: 0;
-        margin-bottom: 0.5rem;
-    ">⭐ YANTRA</h1>
-    <p style="
-        color: rgba(255,255,255,0.9);
-        font-size: 1.125rem;
-        margin: 0;
-        font-weight: 500;
-    ">Professional Latency Arbitrage & Multi-Broker Trading Platform</p>
-</div>
-""", unsafe_allow_html=True)
+
 with st.sidebar:
     st.markdown("### 🎯 YANTRA Control Center")
     st.markdown("---")
@@ -3144,6 +3120,7 @@ if st.session_state.get('auto_refresh', False) and st.session_state.page in ["Da
 
 # Custom CSS for enhanced styling
 # Clean Minimal Professional Styling
+# Clean Minimal Professional Styling - FIXED VERSION
 st.markdown("""
 <style>
 /* IMPORT CLEAN FONT */
@@ -3207,33 +3184,34 @@ header { visibility: hidden; }
     max-width: 1400px !important;
 }
 
-/* CLEAN METRIC CARDS */
+/* FIXED METRIC CARDS - VISIBLE NUMBERS */
 [data-testid="metric-container"] {
-    background: #ffffff !important;
-    border: 1px solid #e2e8f0 !important;
+    background: linear-gradient(135deg, #3b82f6, #1d4ed8) !important;
+    border: 1px solid #2563eb !important;
     border-radius: 16px !important;
     padding: 2rem !important;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.08) !important;
+    box-shadow: 0 4px 20px rgba(59, 130, 246, 0.2) !important;
     transition: all 0.3s ease !important;
     text-align: center !important;
 }
 
 [data-testid="metric-container"]:hover {
     transform: translateY(-4px) !important;
-    box-shadow: 0 8px 30px rgba(0,0,0,0.12) !important;
-    border-color: #3b82f6 !important;
+    box-shadow: 0 8px 30px rgba(59, 130, 246, 0.3) !important;
+    border-color: #1d4ed8 !important;
 }
 
 [data-testid="metric-container"] [data-testid="metric-value"] {
     font-size: 2.5rem !important;
     font-weight: 700 !important;
-    color: #1e293b !important;
+    color: #ffffff !important;
     margin-bottom: 0.5rem !important;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.1) !important;
 }
 
 [data-testid="metric-container"] [data-testid="metric-label"] {
     font-size: 0.875rem !important;
-    color: #64748b !important;
+    color: rgba(255,255,255,0.9) !important;
     font-weight: 500 !important;
     text-transform: uppercase !important;
     letter-spacing: 0.05em !important;
@@ -3241,12 +3219,12 @@ header { visibility: hidden; }
 
 [data-testid="metric-container"] [data-testid="metric-delta"] {
     font-size: 0.75rem !important;
-    background: #f1f5f9 !important;
-    color: #475569 !important;
+    background: rgba(255,255,255,0.2) !important;
+    color: #ffffff !important;
     padding: 0.25rem 0.75rem !important;
     border-radius: 20px !important;
     margin-top: 0.75rem !important;
-    font-weight: 500 !important;
+    font-weight: 600 !important;
 }
 
 /* COLUMN FIXES */
@@ -3409,7 +3387,7 @@ header { visibility: hidden; }
     box-shadow: 0 2px 8px rgba(59, 130, 246, 0.2) !important;
 }
 
-/* CHARTS */
+/* CHARTS - LIGHT BACKGROUND */
 .plotly-graph-div {
     background: #ffffff !important;
     border: 1px solid #e2e8f0 !important;
