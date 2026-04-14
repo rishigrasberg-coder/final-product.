@@ -450,45 +450,34 @@ if st.session_state.page == "Dashboard":
     # Main dashboard content
     col1, col2 = st.columns([2, 1])
     
-    with col1:        # Market Overview
+    with col1:        
+        
+                # Market Overview
         st.markdown("### 📊 Market Overview")
         
-        # Create candlestick chart
+        # Create market heatmap
         symbols = ['EURUSD', 'GBPUSD', 'USDJPY', 'AUDUSD', 'USDCAD', 'NZDUSD', 'USDCHF', 'EURGBP']
+        timeframes = ['1H', '4H', '1D', '1W']
         
-        # Generate realistic OHLC data
-        ohlc_data = []
-        for symbol in symbols:
-            open_price = random.uniform(1.0, 2.0)
-            close_price = open_price + random.uniform(-0.02, 0.02)
-            high_price = max(open_price, close_price) + random.uniform(0, 0.01)
-            low_price = min(open_price, close_price) - random.uniform(0, 0.01)
-            
-            ohlc_data.append({
-                'Symbol': symbol,
-                'Open': open_price,
-                'High': high_price,
-                'Low': low_price,
-                'Close': close_price,
-                'Change': ((close_price - open_price) / open_price) * 100
-            })
+        # Generate price change data
+        heatmap_data = np.random.uniform(-2, 2, (len(symbols), len(timeframes)))
         
-        # Create candlestick chart
-        fig = go.Figure(data=[go.Candlestick(
-            x=symbols,
-            open=[d['Open'] for d in ohlc_data],
-            high=[d['High'] for d in ohlc_data],
-            low=[d['Low'] for d in ohlc_data],
-            close=[d['Close'] for d in ohlc_data],
-            name='Price'
-        )])
+        fig = go.Figure(data=go.Heatmap(
+            z=heatmap_data,
+            x=timeframes,
+            y=symbols,
+            colorscale='RdYlGn',
+            zmid=0,
+            text=np.round(heatmap_data, 2),
+            texttemplate="%{text}%",
+            textfont={"size": 12},
+            colorbar=dict(title="Change %")
+        ))
         
         fig.update_layout(
-            title="24H Price Action - Major Pairs",
-            yaxis_title="Price",
+            title="Market Performance Heatmap (% Change)",
             template='plotly_dark' if st.session_state.theme == "Dark" else 'plotly_white',
             height=400,
-            xaxis_rangeslider_visible=False,
             margin=dict(l=20, r=20, t=40, b=20)
         )
         
