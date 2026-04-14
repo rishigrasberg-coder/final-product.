@@ -1802,16 +1802,16 @@ elif st.session_state.page == "Backtesting":
         else:
             st.info("No saved strategies")
         
-        # Quick strategy templates
-        st.markdown("#### 🎯 Quick Templates")
-        
-                templates = [
-            "Golden Cross (50/200 MA)",
-            "RSI Divergence", 
-            "Bollinger Squeeze",
-            "MACD Signal",
-            "Support/Resistance"
-        ]
+       # Quick strategy templates
+st.markdown("#### 🎯 Quick Templates")
+
+templates = [
+    "Golden Cross (50/200 MA)",
+    "RSI Divergence", 
+    "Bollinger Squeeze",
+    "MACD Signal",
+    "Support/Resistance"
+]
         
         for template in templates:
             if st.button(f"📋 {template}", key=f"template_{template}", use_container_width=True):
