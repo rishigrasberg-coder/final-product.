@@ -642,13 +642,31 @@ with st.sidebar:
         st.info("🤖 Auto Trading: IDLE")
 
 # MAIN CONTENT AREA
+# Clean Professional Header
 st.markdown("""
-<div class="yantra-header">
-    <h1 class="yantra-logo">⭐ YANTRA</h1>
-    <p class="yantra-tagline">Professional Latency Arbitrage & Multi-Broker Trading Platform</p>
+<div style="
+    background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+    padding: 2rem;
+    border-radius: 20px;
+    margin-bottom: 2rem;
+    text-align: center;
+    box-shadow: 0 8px 30px rgba(59, 130, 246, 0.2);
+">
+    <h1 style="
+        color: white;
+        font-size: 2.5rem;
+        font-weight: 700;
+        margin: 0;
+        margin-bottom: 0.5rem;
+    ">⭐ YANTRA</h1>
+    <p style="
+        color: rgba(255,255,255,0.9);
+        font-size: 1.125rem;
+        margin: 0;
+        font-weight: 500;
+    ">Professional Latency Arbitrage & Multi-Broker Trading Platform</p>
 </div>
 """, unsafe_allow_html=True)
-
 # PAGE ROUTING WITH ALL NEW FEATURES
 if st.session_state.page == "Dashboard":
     st.markdown("# 🏠 Enhanced Dashboard")
@@ -3122,242 +3140,591 @@ if st.session_state.get('auto_refresh', False) and st.session_state.page in ["Da
 # Clean Minimal Professional Styling
 # Clean Minimal Professional Styling - FIXED VERSION
 # BULLETPROOF CSS - VISIBLE NUMBERS GUARANTEED
+# BULLETPROOF PROFESSIONAL CSS - FINAL VERSION
 st.markdown("""
 <style>
-/* IMPORT CLEAN FONT */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+/* IMPORT PROFESSIONAL FONT */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
 
-/* COMPLETE RESET */
+/* NUCLEAR RESET - DESTROY ALL DEFAULT STYLING */
 * {
     margin: 0 !important;
     padding: 0 !important;
     box-sizing: border-box !important;
 }
 
-/* BASE APP STYLING */
+/* BASE APPLICATION STYLING */
 .stApp {
-    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%) !important;
-    color: #1e293b !important;
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif !important;
+    background: #f5f5f7 !important;
+    color: #1d1d1f !important;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+    font-weight: 400 !important;
+    line-height: 1.6 !important;
 }
 
-/* HIDE STREAMLIT BRANDING */
-#MainMenu { visibility: hidden !important; }
-footer { visibility: hidden !important; }
-header { visibility: hidden !important; }
-.stDeployButton { display: none !important; }
+/* DESTROY STREAMLIT BRANDING */
+#MainMenu { visibility: hidden !important; display: none !important; }
+footer { visibility: hidden !important; display: none !important; }
+header { visibility: hidden !important; display: none !important; }
+.stDeployButton { display: none !important; visibility: hidden !important; }
+.stDecoration { display: none !important; }
 
-/* FORCE METRIC CARDS TO BE VISIBLE */
-[data-testid="metric-container"] {
-    background: linear-gradient(135deg, #3b82f6, #1d4ed8) !important;
-    border: 2px solid #2563eb !important;
-    border-radius: 16px !important;
-    padding: 2rem !important;
-    box-shadow: 0 8px 25px rgba(59, 130, 246, 0.3) !important;
-    margin: 1rem 0 !important;
+/* SIDEBAR - PROFESSIONAL BLACK THEME */
+.css-1d391kg, .css-1cypcdb, .css-17eq0hr, section[data-testid="stSidebar"] {
+    background: linear-gradient(180deg, #1d1d1f 0%, #000000 100%) !important;
+    border-right: none !important;
+    box-shadow: 4px 0 20px rgba(0,0,0,0.3) !important;
+    min-width: 280px !important;
 }
 
-/* FORCE METRIC VALUES TO BE WHITE AND VISIBLE */
-[data-testid="metric-container"] [data-testid="metric-value"] {
+/* SIDEBAR TITLE STYLING */
+.css-1d391kg h1, .css-1d391kg .stMarkdown h1 {
     color: #ffffff !important;
-    font-size: 3rem !important;
-    font-weight: 900 !important;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.3) !important;
+    font-size: 1.5rem !important;
+    font-weight: 700 !important;
+    text-align: center !important;
+    padding: 1rem 0 !important;
+    border-bottom: 1px solid #333333 !important;
+    margin-bottom: 1rem !important;
+}
+
+/* SIDEBAR BUTTONS - PROFESSIONAL STYLING */
+.css-1d391kg .stButton > button,
+.css-1cypcdb .stButton > button,
+section[data-testid="stSidebar"] .stButton > button {
+    background: transparent !important;
+    color: #ffffff !important;
+    border: 1px solid #333333 !important;
+    border-radius: 12px !important;
+    padding: 0.875rem 1.25rem !important;
+    margin: 0.375rem 0 !important;
+    font-weight: 500 !important;
+    font-size: 0.875rem !important;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    width: 100% !important;
+    text-align: left !important;
+    position: relative !important;
+    overflow: hidden !important;
+}
+
+.css-1d391kg .stButton > button:hover,
+.css-1cypcdb .stButton > button:hover,
+section[data-testid="stSidebar"] .stButton > button:hover {
+    background: linear-gradient(135deg, #333333, #444444) !important;
+    color: #ffffff !important;
+    border-color: #555555 !important;
+    transform: translateY(-2px) translateX(4px) !important;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.4) !important;
+}
+
+.css-1d391kg .stButton > button:active,
+.css-1cypcdb .stButton > button:active,
+section[data-testid="stSidebar"] .stButton > button:active {
+    transform: translateY(0) translateX(2px) !important;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3) !important;
+}
+
+/* SIDEBAR TEXT AND LABELS */
+.css-1d391kg .stMarkdown,
+.css-1d391kg .stSelectbox label,
+.css-1d391kg .stTextInput label,
+.css-1d391kg .stNumberInput label,
+.css-1cypcdb .stMarkdown,
+section[data-testid="stSidebar"] .stMarkdown,
+section[data-testid="stSidebar"] label {
+    color: #ffffff !important;
+    font-weight: 500 !important;
+}
+
+/* SIDEBAR SELECTBOX */
+.css-1d391kg .stSelectbox > div > div,
+.css-1cypcdb .stSelectbox > div > div,
+section[data-testid="stSidebar"] .stSelectbox > div > div {
+    background: #333333 !important;
+    border: 1px solid #555555 !important;
+    border-radius: 8px !important;
+    color: #ffffff !important;
+}
+
+/* MAIN CONTENT CONTAINER */
+.main .block-container {
+    padding: 2rem 3rem !important;
+    max-width: 1600px !important;
+    margin: 0 auto !important;
+}
+
+/* METRIC CARDS - PROFESSIONAL WHITE CARDS */
+[data-testid="metric-container"] {
+    background: #ffffff !important;
+    border: 1px solid #e5e5e7 !important;
+    border-radius: 20px !important;
+    padding: 2.5rem 2rem !important;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08) !important;
+    margin: 1rem 0 !important;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    position: relative !important;
+    overflow: hidden !important;
+}
+
+[data-testid="metric-container"]:hover {
+    transform: translateY(-8px) !important;
+    box-shadow: 0 12px 40px rgba(0,0,0,0.15) !important;
+    border-color: #1d1d1f !important;
+}
+
+[data-testid="metric-container"]::before {
+    content: '' !important;
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    height: 4px !important;
+    background: linear-gradient(90deg, #1d1d1f, #333333, #1d1d1f) !important;
+    opacity: 0 !important;
+    transition: opacity 0.3s ease !important;
+}
+
+[data-testid="metric-container"]:hover::before {
+    opacity: 1 !important;
+}
+
+/* METRIC VALUES - LARGE BLACK NUMBERS */
+[data-testid="metric-container"] [data-testid="metric-value"] {
+    color: #1d1d1f !important;
+    font-size: 3.5rem !important;
+    font-weight: 800 !important;
     margin: 0 !important;
     padding: 0 !important;
     line-height: 1 !important;
     display: block !important;
     visibility: visible !important;
+    text-align: center !important;
+    letter-spacing: -0.02em !important;
 }
 
-/* FORCE METRIC LABELS TO BE WHITE */
+/* METRIC LABELS - SUBTLE GRAY */
 [data-testid="metric-container"] [data-testid="metric-label"] {
-    color: rgba(255,255,255,0.95) !important;
-    font-size: 1rem !important;
+    color: #6e6e73 !important;
+    font-size: 0.875rem !important;
     font-weight: 600 !important;
     text-transform: uppercase !important;
     letter-spacing: 0.1em !important;
-    margin-top: 0.5rem !important;
+    margin-top: 0.75rem !important;
     display: block !important;
     visibility: visible !important;
+    text-align: center !important;
 }
 
-/* FORCE METRIC DELTA TO BE WHITE */
+/* METRIC DELTA - CLEAN STYLING */
 [data-testid="metric-container"] [data-testid="metric-delta"] {
-    color: #ffffff !important;
-    background: rgba(255,255,255,0.2) !important;
-    padding: 0.5rem 1rem !important;
+    color: #6e6e73 !important;
+    background: #f5f5f7 !important;
+    padding: 0.375rem 1rem !important;
     border-radius: 25px !important;
-    font-weight: 700 !important;
+    font-weight: 600 !important;
+    font-size: 0.75rem !important;
     margin-top: 1rem !important;
     display: inline-block !important;
     visibility: visible !important;
+    border: 1px solid #e5e5e7 !important;
 }
 
-/* SIDEBAR STYLING */
-.css-1d391kg {
-    background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%) !important;
-    border-right: 1px solid #e2e8f0 !important;
-}
-
-.css-1d391kg .stButton > button {
-    background: #ffffff !important;
-    color: #475569 !important;
-    border: 1px solid #e2e8f0 !important;
-    border-radius: 12px !important;
-    padding: 0.75rem 1rem !important;
-    margin: 0.25rem 0 !important;
-    font-weight: 500 !important;
-    transition: all 0.2s ease !important;
-    width: 100% !important;
-}
-
-.css-1d391kg .stButton > button:hover {
-    background: #3b82f6 !important;
-    color: white !important;
-    border-color: #3b82f6 !important;
-    transform: translateY(-1px) !important;
-}
-
-/* COLUMN FIXES */
+/* COLUMN SYSTEM - PERFECT ALIGNMENT */
 .stColumns {
     gap: 2rem !important;
+    align-items: stretch !important;
 }
 
 .stColumn {
     padding: 0 !important;
+    display: flex !important;
+    flex-direction: column !important;
 }
 
-/* FORCE CARDS TO BE WHITE */
+.stColumn > div {
+    flex: 1 !important;
+}
+
+/* EXPANDABLE CARDS - CLEAN WHITE DESIGN */
 .stExpander {
     background: #ffffff !important;
-    border: 1px solid #e2e8f0 !important;
-    border-radius: 16px !important;
+    border: 1px solid #e5e5e7 !important;
+    border-radius: 20px !important;
     box-shadow: 0 4px 20px rgba(0,0,0,0.08) !important;
-    margin-bottom: 1.5rem !important;
+    margin-bottom: 2rem !important;
+    overflow: hidden !important;
+    transition: all 0.3s ease !important;
+}
+
+.stExpander:hover {
+    box-shadow: 0 8px 30px rgba(0,0,0,0.12) !important;
+    transform: translateY(-2px) !important;
 }
 
 .streamlit-expanderHeader {
-    background: #f8fafc !important;
-    color: #1e293b !important;
-    font-weight: 600 !important;
-    padding: 1.25rem 1.5rem !important;
+    background: linear-gradient(135deg, #fbfbfd, #f5f5f7) !important;
+    color: #1d1d1f !important;
+    font-weight: 700 !important;
+    font-size: 1.125rem !important;
+    padding: 1.5rem 2rem !important;
+    border-bottom: 1px solid #e5e5e7 !important;
+    transition: all 0.2s ease !important;
+}
+
+.streamlit-expanderHeader:hover {
+    background: linear-gradient(135deg, #f5f5f7, #ebebed) !important;
 }
 
 .streamlit-expanderContent {
     background: #ffffff !important;
-    padding: 1.5rem !important;
+    padding: 2rem !important;
 }
 
-/* FORCE BUTTONS TO BE BLUE */
+/* BUTTONS - PROFESSIONAL BLACK STYLING */
 .stButton > button {
-    background: #3b82f6 !important;
-    color: white !important;
+    background: linear-gradient(135deg, #1d1d1f, #333333) !important;
+    color: #ffffff !important;
     border: none !important;
     border-radius: 12px !important;
-    padding: 0.75rem 1.5rem !important;
+    padding: 0.875rem 2rem !important;
     font-weight: 600 !important;
-    transition: all 0.2s ease !important;
+    font-size: 0.875rem !important;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
     width: 100% !important;
+    position: relative !important;
+    overflow: hidden !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.05em !important;
 }
 
 .stButton > button:hover {
-    background: #2563eb !important;
-    transform: translateY(-1px) !important;
+    background: linear-gradient(135deg, #333333, #555555) !important;
+    transform: translateY(-3px) !important;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.3) !important;
 }
 
-/* FORCE CHARTS TO BE WHITE */
+.stButton > button:active {
+    transform: translateY(-1px) !important;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2) !important;
+}
+
+/* SUCCESS BUTTONS - GREEN ACCENT */
+.stButton > button[kind="primary"] {
+    background: linear-gradient(135deg, #30d158, #28cd4f) !important;
+    color: #ffffff !important;
+}
+
+.stButton > button[kind="primary"]:hover {
+    background: linear-gradient(135deg, #28cd4f, #20c946) !important;
+    box-shadow: 0 8px 25px rgba(48, 209, 88, 0.4) !important;
+}
+
+/* CHARTS - CLEAN WHITE BACKGROUND */
 .plotly-graph-div {
     background: #ffffff !important;
-    border: 1px solid #e2e8f0 !important;
-    border-radius: 16px !important;
-    padding: 1rem !important;
+    border: 1px solid #e5e5e7 !important;
+    border-radius: 20px !important;
+    padding: 1.5rem !important;
     box-shadow: 0 4px 20px rgba(0,0,0,0.08) !important;
+    margin: 1rem 0 !important;
 }
 
-/* FORCE TABLES TO BE WHITE */
+/* TABLES - PROFESSIONAL STYLING */
 .dataframe {
     background: #ffffff !important;
-    border: 1px solid #e2e8f0 !important;
-    border-radius: 16px !important;
+    border: 1px solid #e5e5e7 !important;
+    border-radius: 20px !important;
     overflow: hidden !important;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08) !important;
+    margin: 1rem 0 !important;
 }
 
 .dataframe th {
-    background: #f8fafc !important;
-    color: #374151 !important;
-    font-weight: 600 !important;
-    padding: 1rem !important;
+    background: linear-gradient(135deg, #fbfbfd, #f5f5f7) !important;
+    color: #1d1d1f !important;
+    font-weight: 700 !important;
+    padding: 1.25rem 1.5rem !important;
+    border-bottom: 2px solid #e5e5e7 !important;
+    font-size: 0.875rem !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.05em !important;
 }
 
 .dataframe td {
     background: #ffffff !important;
-    color: #374151 !important;
-    padding: 1rem !important;
+    color: #1d1d1f !important;
+    padding: 1rem 1.5rem !important;
+    border-bottom: 1px solid #f5f5f7 !important;
+    font-size: 0.875rem !important;
+    transition: background 0.2s ease !important;
 }
 
-/* FORM INPUTS */
+.dataframe tr:hover td {
+    background: #fbfbfd !important;
+}
+
+/* FORM INPUTS - CLEAN STYLING */
 .stTextInput > div > div > input,
 .stSelectbox > div > div > select,
-.stNumberInput > div > div > input {
+.stNumberInput > div > div > input,
+.stTextArea > div > div > textarea {
     background: #ffffff !important;
-    border: 1px solid #d1d5db !important;
+    border: 2px solid #d2d2d7 !important;
     border-radius: 12px !important;
-    color: #374151 !important;
-    padding: 0.75rem !important;
+    color: #1d1d1f !important;
+    padding: 0.875rem 1rem !important;
+    font-size: 0.875rem !important;
+    font-weight: 500 !important;
+    transition: all 0.3s ease !important;
 }
 
-/* TABS */
+.stTextInput > div > div > input:focus,
+.stSelectbox > div > div > select:focus,
+.stNumberInput > div > div > input:focus,
+.stTextArea > div > div > textarea:focus {
+    border-color: #1d1d1f !important;
+    box-shadow: 0 0 0 4px rgba(29, 29, 31, 0.1) !important;
+    outline: none !important;
+    transform: translateY(-1px) !important;
+}
+
+/* SELECTBOX DROPDOWN */
+.stSelectbox > div > div > div {
+    background: #ffffff !important;
+    border: 1px solid #e5e5e7 !important;
+    border-radius: 12px !important;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.15) !important;
+}
+
+.stSelectbox > div > div > div > div {
+    background: #ffffff !important;
+    color: #1d1d1f !important;
+    padding: 0.75rem 1rem !important;
+    transition: background 0.2s ease !important;
+}
+
+.stSelectbox > div > div > div > div:hover {
+    background: #f5f5f7 !important;
+}
+
+/* TABS - PROFESSIONAL STYLING */
 .stTabs [data-baseweb="tab-list"] {
-    background: #f8fafc !important;
-    padding: 0.5rem !important;
-    border-radius: 16px !important;
-    border: 1px solid #e2e8f0 !important;
+    background: #ffffff !important;
+    padding: 0.75rem !important;
+    border-radius: 20px !important;
+    border: 1px solid #e5e5e7 !important;
+    margin-bottom: 2rem !important;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05) !important;
 }
 
 .stTabs [data-baseweb="tab"] {
-    color: #64748b !important;
-    padding: 0.75rem 1.5rem !important;
-    border-radius: 12px !important;
+    color: #6e6e73 !important;
+    padding: 0.875rem 1.75rem !important;
+    border-radius: 15px !important;
+    font-weight: 600 !important;
+    font-size: 0.875rem !important;
+    transition: all 0.3s ease !important;
+    margin: 0 0.25rem !important;
+}
+
+.stTabs [data-baseweb="tab"]:hover {
+    background: #f5f5f7 !important;
+    color: #1d1d1f !important;
+    transform: translateY(-1px) !important;
 }
 
 .stTabs [aria-selected="true"] {
-    background: #3b82f6 !important;
-    color: white !important;
+    background: linear-gradient(135deg, #1d1d1f, #333333) !important;
+    color: #ffffff !important;
+    box-shadow: 0 4px 15px rgba(29, 29, 31, 0.3) !important;
 }
 
-/* HEADERS */
+/* HEADERS - PROFESSIONAL TYPOGRAPHY */
 .stMarkdown h1 {
-    color: #1e293b !important;
-    font-weight: 700 !important;
+    color: #1d1d1f !important;
+    font-weight: 800 !important;
     margin-bottom: 2rem !important;
+    font-size: 3rem !important;
+    line-height: 1.1 !important;
+    letter-spacing: -0.02em !important;
 }
 
 .stMarkdown h2 {
-    color: #374151 !important;
-    font-weight: 600 !important;
+    color: #1d1d1f !important;
+    font-weight: 700 !important;
     margin-bottom: 1.5rem !important;
+    font-size: 2.25rem !important;
+    line-height: 1.2 !important;
+    letter-spacing: -0.01em !important;
 }
 
 .stMarkdown h3 {
-    color: #475569 !important;
+    color: #1d1d1f !important;
     font-weight: 600 !important;
+    margin-bottom: 1rem !important;
+    font-size: 1.5rem !important;
+    line-height: 1.3 !important;
+}
+
+.stMarkdown p {
+    color: #1d1d1f !important;
+    font-size: 1rem !important;
+    line-height: 1.6 !important;
     margin-bottom: 1rem !important;
 }
 
-/* SCROLLBAR */
+/* ALERTS - PROFESSIONAL STYLING */
+.stAlert {
+    border-radius: 15px !important;
+    border: none !important;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1) !important;
+    padding: 1.25rem 1.5rem !important;
+    margin: 1rem 0 !important;
+}
+
+.stAlert[data-baseweb="notification"] {
+    background: linear-gradient(135deg, #30d158, #28cd4f) !important;
+    color: white !important;
+}
+
+.stAlert[data-baseweb="notification"][kind="info"] {
+    background: linear-gradient(135deg, #007aff, #0056cc) !important;
+}
+
+.stAlert[data-baseweb="notification"][kind="warning"] {
+    background: linear-gradient(135deg, #ff9500, #e6850e) !important;
+}
+
+.stAlert[data-baseweb="notification"][kind="error"] {
+    background: linear-gradient(135deg, #ff3b30, #e6342a) !important;
+}
+
+/* SCROLLBAR - CLEAN STYLING */
 ::-webkit-scrollbar {
-    width: 8px;
+    width: 12px;
 }
 
 ::-webkit-scrollbar-track {
-    background: #f1f5f9;
+    background: #f5f5f7;
+    border-radius: 6px;
 }
 
 ::-webkit-scrollbar-thumb {
-    background: #cbd5e1;
-    border-radius: 4px;
+    background: linear-gradient(180deg, #d2d2d7, #a1a1a6);
+    border-radius: 6px;
+    border: 2px solid #f5f5f7;
 }
+
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, #a1a1a6, #8e8e93);
+}
+
+/* RESPONSIVE DESIGN */
+@media (max-width: 1200px) {
+    .main .block-container {
+        padding: 1.5rem 2rem !important;
+    }
+}
+
+@media (max-width: 768px) {
+    .main .block-container {
+        padding: 1rem !important;
+    }
+    
+    .stColumns {
+        gap: 1rem !important;
+    }
+    
+    [data-testid="metric-container"] {
+        padding: 1.5rem !important;
+    }
+    
+    [data-testid="metric-container"] [data-testid="metric-value"] {
+        font-size: 2.5rem !important;
+    }
+    
+    .stMarkdown h1 {
+        font-size: 2rem !important;
+    }
+    
+    .stMarkdown h2 {
+        font-size: 1.5rem !important;
+    }
+}
+
+@media (max-width: 480px) {
+    [data-testid="metric-container"] [data-testid="metric-value"] {
+        font-size: 2rem !important;
+    }
+    
+    .stButton > button {
+        padding: 0.75rem 1rem !important;
+        font-size: 0.8rem !important;
+    }
+}
+
+/* ANIMATIONS */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.fade-in-up {
+    animation: fadeInUp 0.6s ease-out;
+}
+
+.slide-in-right {
+    animation: slideInRight 0.6s ease-out;
+}
+
+/* LOADING STATES */
+.loading-shimmer {
+    background: linear-gradient(90deg, #f5f5f7 25%, #ebebed 50%, #f5f5f7 75%);
+    background-size: 200% 100%;
+    animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+    0% {
+        background-position: -200% 0;
+    }
+    100% {
+        background-position: 200% 0;
+    }
+}
+
+/* UTILITY CLASSES */
+.text-center { text-align: center !important; }
+.text-left { text-align: left !important; }
+.text-right { text-align: right !important; }
+.font-bold { font-weight: 700 !important; }
+.font-semibold { font-weight: 600 !important; }
+.font-medium { font-weight: 500 !important; }
+.text-sm { font-size: 0.875rem !important; }
+.text-lg { font-size: 1.125rem !important; }
+.text-xl { font-size: 1.25rem !important; }
+.mb-0 { margin-bottom: 0 !important; }
+.mb-1 { margin-bottom: 0.5rem !important; }
+.mb-2 { margin-bottom: 1rem !important; }
+.mb-3 { margin-bottom: 1.5rem !important; }
+.mb-4 { margin-bottom: 2rem !important; }
 </style>
 """, unsafe_allow_html=True)
 # JavaScript for enhanced interactivity
