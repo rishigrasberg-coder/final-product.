@@ -588,8 +588,6 @@ elif st.session_state.page == "LP Bridge":
     
     with col2:
         total_liquidity = sum([lp['liquidity'] for lp in lps])
-        st.metric("Total Liquidity", f"${total_
-                total_liquidity = sum([lp['liquidity'] for lp in lps])
         st.metric("Total Liquidity", f"${total_liquidity:,}")
     
     with col3:
