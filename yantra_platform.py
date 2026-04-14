@@ -2438,28 +2438,28 @@ elif st.session_state.page == "LP Bridge Manager":
             
             # Liquidity distribution pie chart
             lp_liquidity = []
-            lp_names = []
-            
-                        for lp in lps:
-                if lp['status'] == 'Connected' and lp['available_liquidity'] > 0:
-                    lp_liquidity.append(lp['available_liquidity'])
-                    lp_names.append(lp['name'].split()[0])
-            
-            if lp_liquidity:
-                fig = go.Figure(data=[go.Pie(
-                    labels=lp_names,
-                    values=lp_liquidity,
-                    hole=0.4
-                )])
-                
-                fig.update_layout(
-                    title="Liquidity Distribution",
-                    template='plotly_dark' if st.session_state.theme == "Dark" else 'plotly_white',
-                    height=300,
-                    margin=dict(l=20, r=20, t=40, b=20)
-                )
-                
-                st.plotly_chart(fig, use_container_width=True)
+lp_names = []
+
+for lp in lps:
+    if lp['status'] == 'Connected' and lp['available_liquidity'] > 0:
+        lp_liquidity.append(lp['available_liquidity'])
+        lp_names.append(lp['name'].split()[0])
+
+if lp_liquidity:
+    fig = go.Figure(data=[go.Pie(
+        labels=lp_names,
+        values=lp_liquidity,
+        hole=0.4
+    )])
+    
+    fig.update_layout(
+        title="Liquidity Distribution",
+        template='plotly_dark' if st.session_state.theme == "Dark" else 'plotly_white',
+        height=300,
+        margin=dict(l=20, r=20, t=40, b=20)
+    )
+    
+    st.plotly_chart(fig, use_container_width=True)
         
         # System alerts
         st.markdown("#### 🚨 System Alerts")
