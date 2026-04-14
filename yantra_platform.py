@@ -3072,23 +3072,23 @@ with theme_col2:
     sidebar_position = st.selectbox("Sidebar Position", ["Left", "Right"], key="sidebar_position")
         
         # Dashboard customization
-        st.markdown("#### 📊 Dashboard Customization")
-        
-        dashboard_col1, dashboard_col2 = st.columns(2)
-        
-        with dashboard_col1:
-            show_portfolio_summary = st.checkbox("Show Portfolio Summary", True, key="show_portfolio")
-            show_market_overview = st.checkbox("Show Market Overview", True, key="show_market")
-            show_recent_trades = st.checkbox("Show Recent Trades", True, key="show_trades")
-            show_news_feed = st.checkbox("Show News Feed", False, key="show_news")
-        
-        with dashboard_col2:
-            default_timeframe = st.selectbox("Default Chart Timeframe", ["1M", "5M", "15M", "30M", "1H", "4H", "1D"], index=4, key="default_timeframe")
-            auto_refresh = st.selectbox("Auto Refresh", ["Off", "5s", "10s", "30s", "1m"], index=2, key="auto_refresh")
-            decimal_places = st.number_input("Price Decimal Places", 2, 8, 5, key="decimal_places")
-    
-    with settings_tab2:
-        st.markdown("#### 🔔 Notification Settings")
+st.markdown("#### 📊 Dashboard Customization")
+
+dashboard_col1, dashboard_col2 = st.columns(2)
+
+with dashboard_col1:
+    show_portfolio_summary = st.checkbox("Show Portfolio Summary", True, key="show_portfolio")
+    show_market_overview = st.checkbox("Show Market Overview", True, key="show_market")
+    show_recent_trades = st.checkbox("Show Recent Trades", True, key="show_trades")
+    show_news_feed = st.checkbox("Show News Feed", False, key="show_news")
+
+with dashboard_col2:
+    default_timeframe = st.selectbox("Default Chart Timeframe", ["1M", "5M", "15M", "30M", "1H", "4H", "1D"], index=4, key="default_timeframe")
+    auto_refresh = st.selectbox("Auto Refresh", ["Off", "5s", "10s", "30s", "1m"], index=2, key="auto_refresh")
+    decimal_places = st.number_input("Price Decimal Places", 2, 8, 5, key="decimal_places")
+
+with settings_tab2:
+    st.markdown("#### 🔔 Notification Settings")
         
         # Notification preferences
         notif_col1, notif_col2 = st.columns(2)
