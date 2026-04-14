@@ -2462,7 +2462,7 @@ if lp_liquidity:
     st.plotly_chart(fig, use_container_width=True)
         
         # System alerts
-        st.markdown("### 🚨 System Alerts")
+st.markdown("#### 🚨 System Alerts")
 
 alerts = [
     {"level": "warning", "message": "High latency detected on LP-3", "time": "2 min ago"},
@@ -2481,6 +2481,8 @@ for alert in alerts:
     else:
         st.info(f"🔵 {alert['message']} ({alert['time']})")
 
+if st.session_state.page == "Risk Management":
+    st.markdown("### ⚠️ Advanced Risk Management")
 # Change elif to if since there's no matching if at this level
 if st.session_state.page == "Risk Management":
     st.markdown("### ⚠️ Advanced Risk Management")
