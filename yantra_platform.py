@@ -6,11 +6,6 @@ import plotly.express as px
 from plotly.subplots import make_subplots
 from datetime import datetime, timedelta
 import time
-import threading
-from datetime import datetime
-from typing import Dict, List
-from enum import Enum
-from dataclasses import dataclass
 import random
 import json
 import asyncio
@@ -302,25 +297,6 @@ class MT5ManagerAPI:
 
 # ===== FIX PROTOCOL ENGINE =====
 
-class ConnectionStatus(Enum):
-    CONNECTED = "Connected"
-    DISCONNECTED = "Disconnected"
-    ERROR = "Error"
-
-@dataclass
-class PriceTick:
-    symbol: str
-    bid: float
-    ask: float
-    timestamp: datetime
-    source: str
-    latency_ms: float = 0.0
-
-@dataclass
-class LiquidityProvider:
-    name: str
-    status: str
-    supported_symbols: List[str]
 class FIXEngine:
     """
     FIX Protocol engine for LP connectivity
@@ -407,58 +383,6 @@ class FIXEngine:
         with self._lock:
             self._sequence_number += 1
             seq_num = self._sequence_number
-
-    def update_market_data(self, session_id: str, symbol: str, bid: float, ask: float):
-        """Update market data from LP"""
-        
-        # Create session if it doesn't exist
-        if session_id not in self.sessions:
-            # Extract LP name from session_id (remove "session_" prefix)
-            lp_name = session_id.replace("session_", "")
-            self.sessions[session_id] = {
-                "lp_name": lp_name,
-                "sender_comp_id": f"{lp_name}_SENDER",
-                "target_comp_id": f"{lp_name}_TARGET", 
-                "host": "localhost",
-                "port": 9999,
-                "username": "",
-                "password": "",
-                "status": ConnectionStatus.CONNECTED,
-                "heartbeat_interval": 30,
-                "last_heartbeat": datetime.now(),
-                "socket": None,
-                "sequence_in": 0,
-                "sequence_out": 0
-            }
-        
-        lp_name = self.sessions[session_id]["lp_name"]
-        
-        if lp_name not in self.price_feeds:
-            self.price_feeds[lp_name] = {}
-        
-        self.price_feeds[lp_name][symbol] = PriceTick(
-            symbol=symbol,
-            bid=bid,
-            ask=ask,
-            timestamp=datetime.now(),
-            source=lp_name,
-            latency_ms=random.uniform(1, 15)
-        )
-
-    def get_best_prices(self, symbol: str) -> Dict[str, float]:
-        """Get best bid/ask across all LPs for a symbol"""
-        best_bid = 0
-        best_ask = float('inf')
-        
-        for lp_name, symbols in self.price_feeds.items():
-            if symbol in symbols:
-                tick = symbols[symbol]
-                if tick.bid > best_bid:
-                    best_bid = tick.bid
-                if tick.ask < best_ask:
-                    best_ask = tick.ask
-        
-        return {"bid": best_bid, "ask": best_ask}
         
         # Standard header fields
         header = {
@@ -611,32 +535,22 @@ class FIXEngine:
         
         return exec_report
     
-def update_market_data(self, session_id: str, symbol: str, bid: float, ask: float):
-    """Update market data from LP"""
+    def update_market_data(self, session_id: str, symbol: str, bid: float, ask: float):
+        """Update market data from LP"""
+        lp_name = self.sessions[session_id]["lp_name"]
+        
+        if lp_name not in self.price_feeds:
+            self.price_feeds[lp_name] = {}
+        
+        self.price_feeds[lp_name][symbol] = PriceTick(
+            symbol=symbol,
+            bid=bid,
+            ask=ask,
+            timestamp=datetime.now(),
+            source=lp_name,
+            latency_ms=random.uniform(1, 15)
+        )
     
-    # Initialize sessions if it doesn't exist
-    if not hasattr(self, 'sessions'):
-        self.sessions = {}
-    
-    # Create session if it doesn't exist
-    if session_id not in self.sessions:
-        # Extract LP name from session_id (remove "session_" prefix)
-        lp_name = session_id.replace("session_", "")
-        self.sessions[session_id] = {"lp_name": lp_name}
-    
-    lp_name = self.sessions[session_id]["lp_name"]
-    
-    if lp_name not in self.price_feeds:
-        self.price_feeds[lp_name] = {}
-    
-    self.price_feeds[lp_name][symbol] = PriceTick(
-        symbol=symbol,
-        bid=bid,
-        ask=ask,
-        timestamp=datetime.now(),
-        source=lp_name,
-        latency_ms=random.uniform(1, 15)
-    )    
     def get_best_price(self, symbol: str) -> Optional[Dict]:
         """Get best bid/ask across all LPs"""
         best_bid = None
@@ -1148,7 +1062,7 @@ def init_session_state():
         )
     
     # Initialize LP Bridge
-    if 'lp_bridge' not in st.session_state:
+    if 'lp_bridge_engine' not in st.session_state:
         st.session_state.lp_bridge_engine = LPBridge(st.session_state.fix_engine)
     
     # MT5 Connection Status
@@ -1531,16 +1445,29 @@ def simulate_price_feeds():
                 lp_price = new_price + lp_movement
                 lp_spread = base_price * (0.0001 + random.uniform(0, 0.0002))
                 
-                # Initialize fix_engine if it doesn't exist
-                if 'fix_engine' not in st.session_state:
-                    st.session_state.fix_engine = FIXEngine()
-                
+                # Ensure FIX session exists for this LP (needed for price simulation)
+                session_id = f"session_{lp['name']}"
+                if session_id not in st.session_state.fix_engine.sessions:
+                    st.session_state.fix_engine.sessions[session_id] = {
+                        "lp_name": lp['name'],
+                        "sender_comp_id": "YANTRA",
+                        "target_comp_id": lp['name'].upper().replace(' ', ''),
+                        "host": lp.get('fix_host', '127.0.0.1'),
+                        "port": lp.get('fix_port', 9876),
+                        "status": "Simulated",
+                        "heartbeat_interval": 30,
+                        "last_heartbeat": None,
+                        "socket": None,
+                        "sequence_in": 0,
+                        "sequence_out": 0
+                    }
                 st.session_state.fix_engine.update_market_data(
-                    f"session_{lp['name']}",
+                    session_id,
                     symbol,
                     lp_price - lp_spread/2,
                     lp_price + lp_spread/2
                 )
+
 # Call price simulation
 simulate_price_feeds()
 
