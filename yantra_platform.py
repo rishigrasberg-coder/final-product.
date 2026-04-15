@@ -1455,13 +1455,16 @@ def simulate_price_feeds():
                 lp_price = new_price + lp_movement
                 lp_spread = base_price * (0.0001 + random.uniform(0, 0.0002))
                 
+                # Initialize fix_engine if it doesn't exist
+                if 'fix_engine' not in st.session_state:
+                    st.session_state.fix_engine = FIXEngine()
+                
                 st.session_state.fix_engine.update_market_data(
-                    f"session_{lp['name']}", 
+                    f"session_{lp['name']}",
                     symbol,
                     lp_price - lp_spread/2,
                     lp_price + lp_spread/2
                 )
-
 # Call price simulation
 simulate_price_feeds()
 
