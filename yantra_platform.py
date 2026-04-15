@@ -407,6 +407,60 @@ class FIXEngine:
         with self._lock:
             self._sequence_number += 1
             seq_num = self._sequence_number
+
+            def update_market_data(self, session_id: str, symbol: str, bid: float, ask: float):
+        """Update market data from LP"""
+        
+        # Create session if it doesn't exist
+        if session_id not in self.sessions:
+            # Extract LP name from session_id (remove "session_" prefix)
+            lp_name = session_id.replace("session_", "")
+            self.sessions[session_id] = {
+                "lp_name": lp_name,
+                "sender_comp_id": f"{lp_name}_SENDER",
+                "target_comp_id": f"{lp_name}_TARGET", 
+                "host": "localhost",
+                "port": 9999,
+                "username": "",
+                "password": "",
+                "status": ConnectionStatus.CONNECTED,
+                "heartbeat_interval": 30,
+                "last_heartbeat": datetime.now(),
+                "socket": None,
+                "sequence_in": 0,
+                "sequence_out": 0
+            }
+        
+        lp_name = self.sessions[session_id]["lp_name"]
+        
+        if lp_name not in self.price_feeds:
+            self.price_feeds[lp_name] = {}
+        
+        self.price_feeds[lp_name][symbol] = PriceTick(
+            symbol=symbol,
+            bid=bid,
+            ask=ask,
+            timestamp=datetime.now(),
+            source=lp_name,
+            latency_ms=random.uniform(1, 15)
+        )
+
+    def get_best_prices(self, symbol: str) -> Dict[str, float]:
+        """Get best bid/ask across all LPs for a symbol"""
+        best_bid = 0
+        best_ask = float('inf')
+        
+        for lp_name, symbols in self.price_feeds.items():
+            if symbol in symbols:
+                tick = symbols[symbol]
+                if tick.bid > best_bid:
+                    best_bid = tick.bid
+                if tick.ask < best_ask:
+                    best_ask = tick.ask
+        
+        return {"bid": best_bid, "ask": best_ask}
+
+    def _build_fix_message(self, msg_type: str, session_id: str, fields: Dict[int, str]) -> str:
         
         # Standard header fields
         header = {
