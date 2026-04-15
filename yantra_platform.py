@@ -6,6 +6,11 @@ import plotly.express as px
 from plotly.subplots import make_subplots
 from datetime import datetime, timedelta
 import time
+import threading
+from datetime import datetime
+from typing import Dict, List
+from enum import Enum
+from dataclasses import dataclass
 import random
 import json
 import asyncio
@@ -297,6 +302,25 @@ class MT5ManagerAPI:
 
 # ===== FIX PROTOCOL ENGINE =====
 
+class ConnectionStatus(Enum):
+    CONNECTED = "Connected"
+    DISCONNECTED = "Disconnected"
+    ERROR = "Error"
+
+@dataclass
+class PriceTick:
+    symbol: str
+    bid: float
+    ask: float
+    timestamp: datetime
+    source: str
+    latency_ms: float = 0.0
+
+@dataclass
+class LiquidityProvider:
+    name: str
+    status: str
+    supported_symbols: List[str]
 class FIXEngine:
     """
     FIX Protocol engine for LP connectivity
