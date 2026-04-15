@@ -408,7 +408,7 @@ class FIXEngine:
             self._sequence_number += 1
             seq_num = self._sequence_number
 
-            def update_market_data(self, session_id: str, symbol: str, bid: float, ask: float):
+    def update_market_data(self, session_id: str, symbol: str, bid: float, ask: float):
         """Update market data from LP"""
         
         # Create session if it doesn't exist
@@ -459,8 +459,6 @@ class FIXEngine:
                     best_ask = tick.ask
         
         return {"bid": best_bid, "ask": best_ask}
-
-    def _build_fix_message(self, msg_type: str, session_id: str, fields: Dict[int, str]) -> str:
         
         # Standard header fields
         header = {
