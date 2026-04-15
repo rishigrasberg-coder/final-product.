@@ -535,22 +535,32 @@ class FIXEngine:
         
         return exec_report
     
-    def update_market_data(self, session_id: str, symbol: str, bid: float, ask: float):
-        """Update market data from LP"""
-        lp_name = self.sessions[session_id]["lp_name"]
-        
-        if lp_name not in self.price_feeds:
-            self.price_feeds[lp_name] = {}
-        
-        self.price_feeds[lp_name][symbol] = PriceTick(
-            symbol=symbol,
-            bid=bid,
-            ask=ask,
-            timestamp=datetime.now(),
-            source=lp_name,
-            latency_ms=random.uniform(1, 15)
-        )
+def update_market_data(self, session_id: str, symbol: str, bid: float, ask: float):
+    """Update market data from LP"""
     
+    # Initialize sessions if it doesn't exist
+    if not hasattr(self, 'sessions'):
+        self.sessions = {}
+    
+    # Create session if it doesn't exist
+    if session_id not in self.sessions:
+        # Extract LP name from session_id (remove "session_" prefix)
+        lp_name = session_id.replace("session_", "")
+        self.sessions[session_id] = {"lp_name": lp_name}
+    
+    lp_name = self.sessions[session_id]["lp_name"]
+    
+    if lp_name not in self.price_feeds:
+        self.price_feeds[lp_name] = {}
+    
+    self.price_feeds[lp_name][symbol] = PriceTick(
+        symbol=symbol,
+        bid=bid,
+        ask=ask,
+        timestamp=datetime.now(),
+        source=lp_name,
+        latency_ms=random.uniform(1, 15)
+    )    
     def get_best_price(self, symbol: str) -> Optional[Dict]:
         """Get best bid/ask across all LPs"""
         best_bid = None
